@@ -6,7 +6,7 @@ public class Article {
     private int quantite;
     private int codeBarre;
     private double prix;
-    private int seuillDeReassortiment;
+    private int seuilDeReassortiment;
     private boolean typeDeVente;
 
     public String getNom() {
@@ -41,12 +41,12 @@ public class Article {
         this.prix = prix;
     }
 
-    public int getSeuillDeReassortiment() {
-        return seuillDeReassortiment;
+    public int getSeuilDeReassortiment() {
+        return seuilDeReassortiment;
     }
 
-    public void setSeuillDeReassortiment(int seuillDeReassortiment) {
-        this.seuillDeReassortiment = seuillDeReassortiment;
+    public void setSeuilDeReassortiment(int seuilDeReassortiment) {
+        this.seuilDeReassortiment = seuilDeReassortiment;
     }
 
     public boolean isTypeDeVente() {
