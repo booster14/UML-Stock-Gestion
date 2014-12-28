@@ -11,6 +11,13 @@ public class FournisseurControlleur {
     private FournisseurControlleur(){
         bdd = FournisseurManagerBDD.getInstance();
     }
+    
+    public static FournisseurControlleur getInstance(){
+        if(instance == null){
+            instance = new FournisseurControlleur();
+        }
+        return instance;
+    }
 
     /**
      * 
