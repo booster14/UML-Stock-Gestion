@@ -8,7 +8,6 @@ public class Article {
     private double prix;
     private int seuillDeReassortiment;
     private boolean typeDeVente;
-    private int attribute;
 
     public String getNom() {
         return nom;
@@ -56,13 +55,5 @@ public class Article {
 
     public void setTypeDeVente(boolean typeDeVente) {
         this.typeDeVente = typeDeVente;
-    }
-
-    public int getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(int attribute) {
-        this.attribute = attribute;
     }
 }
