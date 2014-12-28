@@ -76,8 +76,32 @@ public class ArticleManagerBDD extends Manager{
 	 * @param codeBarre
 	 */
 	public Article get(int codeBarre) {
-		// TODO - implement ArticleManagerBDD.getArticle
-		throw new UnsupportedOperationException();
+            Article article = new Article();
+            
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE CODEBARRE ="+codeBarre;
+                ResultSet resultat = statement.executeQuery(string);
+                resultat.next();
+                String nom = resultat.getString("NOM");
+                int quantite = resultat.getInt("QUANTITE");
+                double prix = resultat.getDouble("PRIX");
+                int codebarre = resultat.getInt("CODEBARRE");
+                int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
+                boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
+
+                article.setNom(nom);
+                article.setQuantite(quantite);
+                article.setPrix(prix);
+                article.setCodeBarre(codebarre);
+                article.setSeuilDeReassortiment(seuilDeReassortiment);
+                article.setTypeDeVente(typeDeVente);        
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return article;
 	}
 
 	public List<Article> getAll() {
