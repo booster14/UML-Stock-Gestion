@@ -21,7 +21,8 @@ public abstract class Manager {
         /* Chargement du driver JDBC */
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch ( ClassNotFoundException e ) {
+        } catch (ClassNotFoundException e ) {
+            System.out.println("here");
             e.printStackTrace();
         }
 
@@ -33,6 +34,7 @@ public abstract class Manager {
             connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
         }
         catch ( SQLException e ) {
+            System.out.println("Ou ici");
             e.printStackTrace();
         }
     }
