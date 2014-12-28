@@ -29,7 +29,6 @@ public class ArticleManagerBDD extends Manager{
 	 * @param article
 	 */
 	public void ajouter(Article article) {
-
             String nom = article.getNom();
             int quantite = article.getQuantite();
             double prix = article.getPrix();
@@ -58,8 +57,15 @@ public class ArticleManagerBDD extends Manager{
 	 * @param article
 	 */
 	public void supprimer(Article article) {
-		// TODO - implement ArticleManagerBDD.supprimer
-		throw new UnsupportedOperationException();
+            int id = article.getId();
+            
+            try {
+                Statement statement = connexion.createStatement();
+                String string = "DELETE FROM ARTICLE WHERE ID = "+id;
+                statement.executeUpdate(string);
+            } catch (SQLException ex) {
+                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            } 
 	}
 
 	/**
@@ -80,9 +86,10 @@ public class ArticleManagerBDD extends Manager{
             
             try { 
                 Statement statement = connexion.createStatement();
-                String string = "SELECT NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE CODEBARRE ="+codeBarre;
+                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE CODEBARRE ="+codeBarre;
                 ResultSet resultat = statement.executeQuery(string);
                 resultat.next();
+                int id = resultat.getInt("ID");
                 String nom = resultat.getString("NOM");
                 int quantite = resultat.getInt("QUANTITE");
                 double prix = resultat.getDouble("PRIX");
@@ -90,6 +97,7 @@ public class ArticleManagerBDD extends Manager{
                 int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
                 boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
 
+                article.setId(id);
                 article.setNom(nom);
                 article.setQuantite(quantite);
                 article.setPrix(prix);
@@ -109,10 +117,11 @@ public class ArticleManagerBDD extends Manager{
 
             try { 
                 Statement statement = connexion.createStatement();
-                String string = "SELECT NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE";
+                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE";
                 ResultSet resultat = statement.executeQuery(string);
                 while(resultat.next()){
                     Article article = new Article();
+                    int id = resultat.getInt("ID");
                     String nom = resultat.getString("NOM");
                     int quantite = resultat.getInt("QUANTITE");
                     double prix = resultat.getDouble("PRIX");
@@ -120,6 +129,7 @@ public class ArticleManagerBDD extends Manager{
                     int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
                     boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
 
+                    article.setId(id);
                     article.setNom(nom);
                     article.setQuantite(quantite);
                     article.setPrix(prix);
@@ -137,8 +147,37 @@ public class ArticleManagerBDD extends Manager{
 	}
 
 	public List<Article> getACommander() {
-		// TODO - implement ArticleManagerBDD.getArticleACommander
-		throw new UnsupportedOperationException();
+            List<Article> listArticle = new ArrayList<Article>();
+
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE QUANTITE < SEUILDEREASSORTIMENT";
+                ResultSet resultat = statement.executeQuery(string);
+                while(resultat.next()){
+                    Article article = new Article();
+                    int id = resultat.getInt("ID");
+                    String nom = resultat.getString("NOM");
+                    int quantite = resultat.getInt("QUANTITE");
+                    double prix = resultat.getDouble("PRIX");
+                    int codebarre = resultat.getInt("CODEBARRE");
+                    int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
+                    boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
+
+                    article.setId(id);
+                    article.setNom(nom);
+                    article.setQuantite(quantite);
+                    article.setPrix(prix);
+                    article.setCodeBarre(codebarre);
+                    article.setSeuilDeReassortiment(seuilDeReassortiment);
+                    article.setTypeDeVente(typeDeVente);
+
+                    listArticle.add(article);
+                }            
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return listArticle;
 	}
 
 }

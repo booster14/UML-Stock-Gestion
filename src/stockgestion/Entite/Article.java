@@ -2,6 +2,7 @@ package stockgestion.Entite;
 
 public class Article {
 
+    private int id;
     private String nom;
     private int quantite;
     private int codeBarre;
@@ -9,6 +10,15 @@ public class Article {
     private int seuilDeReassortiment;
     private boolean typeDeVente;
 
+    
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
     public String getNom() {
         return nom;
     }
