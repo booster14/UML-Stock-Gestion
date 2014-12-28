@@ -41,6 +41,7 @@ public class FournisseurControlleur {
     }
 
     public List<Fournisseur> getAllFournisseur() {
+        return null;
     }
 
     /**
@@ -48,6 +49,7 @@ public class FournisseurControlleur {
      * @param id id du fournisseur
      */
     public Fournisseur getFournisseur(int id) {
+        return null;
     }
 
 }

@@ -3,7 +3,19 @@ package stockgestion.Manager;
 import java.util.List;
 import stockgestion.Entite.*;
 
-public class CommandeManagerBDD {
+public class CommandeManagerBDD extends Manager{
+        private static CommandeManagerBDD instance = null;
+    
+        private CommandeManagerBDD(){
+            super.connection();     
+        }
+    
+        public static CommandeManagerBDD getInstance(){
+            if(instance == null){
+                instance = new CommandeManagerBDD();
+            }
+            return instance;
+        }
 
 	/**
 	 * 

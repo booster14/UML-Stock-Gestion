@@ -9,8 +9,7 @@ public class ArticleControlleur {
     private static ArticleControlleur instance = null;
     
     private ArticleControlleur(){
-        bdd = ArticleManagerBDD.getInstance();
-        
+        bdd = ArticleManagerBDD.getInstance();       
     }
     
     public static ArticleControlleur getInstance(){
@@ -49,15 +48,15 @@ public class ArticleControlleur {
      * @param codeBarre le code barre de l'article
      */
     public Article getArticle(int codeBarre) {
-        return bdd.getArticle(codeBarre);
+        return bdd.get(codeBarre);
     }
 
     public List<Article> getAllArticles() {
-        return bdd.getAllArticles();
+        return bdd.getAll();
     }
 
     public List<Article> getArticlesACommander() {
-        return bdd.getArticleACommander();
+        return bdd.getACommander();
     }
 
 }

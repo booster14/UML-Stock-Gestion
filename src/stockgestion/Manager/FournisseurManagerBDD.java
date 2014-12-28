@@ -3,8 +3,20 @@ package stockgestion.Manager;
 import java.util.List;
 import stockgestion.Entite.*;
 
-public class FournisseurManagerBDD {
+public class FournisseurManagerBDD extends Manager{
 
+        private static FournisseurManagerBDD instance = null;
+    
+        private FournisseurManagerBDD(){
+            super.connection();     
+        }
+    
+        public static FournisseurManagerBDD getInstance(){
+            if(instance == null){
+                instance = new FournisseurManagerBDD();
+            }
+            return instance;
+        }
 	/**
 	 * 
 	 * @param fournisseur
