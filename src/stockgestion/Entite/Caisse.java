@@ -1,5 +1,7 @@
 package stockgestion.Entite;
 
+import java.util.List;
+
 public class Caisse {
 
 	private boolean etat;

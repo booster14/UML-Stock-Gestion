@@ -3,33 +3,40 @@ package stockgestion.Controlleur;
 import stockgestion.Entite.*;
 
 public class CaisseControlleur {
+    private static CaisseControlleur instance = null;
+    
+    private CaisseControlleur(){}
+    
+    public static CaisseControlleur getInstance(){
+        if(instance == null){
+            instance = new CaisseControlleur();
+        }
+        return instance;
+    }
 
-	/**
-	 * 
-	 * @param caisse
-	 */
-	public void ouvrir(Caisse caisse) {
-		// TODO - implement CaisseControlleur.ouvrir
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param caisse la caisse a ouvrir
+     */
+    public void ouvrir(Caisse caisse) {
+        caisse.setEtat(true);
+    }
 
-	/**
-	 * 
-	 * @param caisse
-	 */
-	public void fermer(Caisse caisse) {
-		// TODO - implement CaisseControlleur.fermer
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param caisse la caisse a fermer
+     */
+    public void fermer(Caisse caisse) {
+        caisse.setEtat(false);
+    }
 
-	/**
-	 * 
-	 * @param caisse
-	 * @param client
-	 */
-	public void ajouterClient(Caisse caisse, Client client) {
-		// TODO - implement CaisseControlleur.ajouterClient
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param caisse la caisse dont on veut ajouter un client
+     * @param client le client a ajouter a la caisse
+     */
+    public void ajouterClient(Caisse caisse, Client client) {
+        caisse.getListClients.add(client);
+    }
 
 }

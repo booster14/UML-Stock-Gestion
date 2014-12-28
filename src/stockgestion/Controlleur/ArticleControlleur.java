@@ -2,53 +2,62 @@ package stockgestion.Controlleur;
 
 import java.util.List;
 import stockgestion.Entite.*;
+import stockgestion.Manager.ArticleManagerBDD;
 
 public class ArticleControlleur {
+    private ArticleManagerBDD bdd;
+    private static ArticleControlleur instance = null;
+    
+    private ArticleControlleur(){
+        bdd = ArticleManagerBDD.getInstance();
+        
+    }
+    
+    public static ArticleControlleur getInstance(){
+        if(instance == null){
+            instance = new ArticleControlleur();
+        }
+        return instance;
+    }
 
-	/**
-	 * 
-	 * @param article
-	 */
-	public void ajouter(Article article) {
-		// TODO - implement ArticleControlleur.ajouter
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param article article a ajouter
+     */
+    public void ajouter(Article article) {
+        bdd.ajouter(article);
+    }
 
-	/**
-	 * 
-	 * @param article
-	 */
-	public void supprimer(Article article) {
-		// TODO - implement ArticleControlleur.supprimer
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param article article a supprimer
+     */
+    public void supprimer(Article article) {
+        bdd.supprimer(article);
+    }
 
-	/**
-	 * 
-	 * @param article
-	 */
-	public void editer(Article article) {
-		// TODO - implement ArticleControlleur.editer
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param article article a modifier
+     */
+    public void editer(Article article) {
+        bdd.editer(article);
+    }
 
-	/**
-	 * 
-	 * @param codeBarre
-	 */
-	public Article getArticle(int codeBarre) {
-		// TODO - implement ArticleControlleur.getArticle
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param codeBarre le code barre de l'article
+     */
+    public Article getArticle(int codeBarre) {
+        return bdd.getArticle(codeBarre);
+    }
 
-	public List<Article> getAllArticles() {
-		// TODO - implement ArticleControlleur.getAllArticles
-		throw new UnsupportedOperationException();
-	}
+    public List<Article> getAllArticles() {
+        return bdd.getAllArticles();
+    }
 
-	public List<Article> getArticlesACommander() {
-		// TODO - implement ArticleControlleur.getArticlesACommander
-		throw new UnsupportedOperationException();
-	}
+    public List<Article> getArticlesACommander() {
+        return bdd.getArticleACommander();
+    }
 
 }
