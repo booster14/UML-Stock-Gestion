@@ -5,6 +5,9 @@
  */
 package stockgestion.UI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author rubeus
@@ -14,6 +17,8 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
 
     private InterfaceUtilisateur() {
         initComponents();
+        addActionListeners();
+        setTitle("Home");
     }
     
     public static InterfaceUtilisateur getInstance(){
@@ -32,22 +37,75 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        produitACommander = new javax.swing.JButton();
+        inventaire = new javax.swing.JButton();
+        ajouterArticle = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        produitACommander.setText("Produit à commander");
+
+        inventaire.setText("Inventaire");
+
+        ajouterArticle.setText("Ajouter un article");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(inventaire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(produitACommander, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ajouterArticle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(produitACommander, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inventaire, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ajouterArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addActionListeners(){
+        ajouterArticle.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AjouterArticle.getInstance().setVisible(true);
+                InterfaceUtilisateur.this.setVisible(false);
+            }
+        });
+        
+        inventaire.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Inventaire.getInstance().setVisible(true);
+                InterfaceUtilisateur.this.setVisible(false);
+            }
+        });
+        
+        produitACommander.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CommanderProduit.getInstance().setVisible(true);
+                InterfaceUtilisateur.this.setVisible(false);
+            }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -84,5 +142,8 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ajouterArticle;
+    private javax.swing.JButton inventaire;
+    private javax.swing.JButton produitACommander;
     // End of variables declaration//GEN-END:variables
 }
