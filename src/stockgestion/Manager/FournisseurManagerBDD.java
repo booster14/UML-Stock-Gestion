@@ -1,5 +1,6 @@
 package stockgestion.Manager;
 
+import java.util.List;
 import stockgestion.Entite.*;
 
 public class FournisseurManagerBDD {

@@ -2,48 +2,45 @@ package stockgestion.Controlleur;
 
 import java.util.List;
 import stockgestion.Entite.*;
+import stockgestion.Manager.FournisseurManagerBDD;
 
 public class FournisseurControlleur {
+    private static FournisseurControlleur instance = null;
+    private FournisseurManagerBDD bdd;
+    
+    private FournisseurControlleur(){
+        bdd = FournisseurManagerBDD.getInstance();
+    }
 
-	/**
-	 * 
-	 * @param fournisseur
-	 */
-	public void ajouter(Fournisseur fournisseur) {
-		// TODO - implement FournisseurControlleur.ajouter
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param fournisseur fournisseur a ajouter dans la BDD
+     */
+    public void ajouter(Fournisseur fournisseur) {
+    }
 
-	/**
-	 * 
-	 * @param fournisseur
-	 */
-	public void supprimer(Fournisseur fournisseur) {
-		// TODO - implement FournisseurControlleur.supprimer
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param fournisseur fournisseur a supprimer de la BDD
+     */
+    public void supprimer(Fournisseur fournisseur) {
+    }
 
-	/**
-	 * 
-	 * @param fournisseur
-	 */
-	public void editer(Fournisseur fournisseur) {
-		// TODO - implement FournisseurControlleur.editer
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param fournisseur fournisseur a editer dans la BDD
+     */
+    public void editer(Fournisseur fournisseur) {
+    }
 
-	public List<Fournisseur> getAllFournisseur() {
-		// TODO - implement FournisseurControlleur.getAllFournisseur
-		throw new UnsupportedOperationException();
-	}
+    public List<Fournisseur> getAllFournisseur() {
+    }
 
-	/**
-	 * 
-	 * @param id
-	 */
-	public Fournisseur getFournisseur(int id) {
-		// TODO - implement FournisseurControlleur.getFournisseur
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * 
+     * @param id id du fournisseur
+     */
+    public Fournisseur getFournisseur(int id) {
+    }
 
 }
