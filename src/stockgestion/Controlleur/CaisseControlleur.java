@@ -6,29 +6,30 @@ public class CaisseControlleur {
 
 	/**
 	 * 
-	 * @param session
+	 * @param caisse
 	 */
-	public void ouvrir(Session session) {
+	public void ouvrir(Caisse caisse) {
 		// TODO - implement CaisseControlleur.ouvrir
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param session
+	 * @param caisse
 	 */
-	public void fermer(Session session) {
+	public void fermer(Caisse caisse) {
 		// TODO - implement CaisseControlleur.fermer
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
-	 * @param session
+	 * @param caisse
 	 * @param client
 	 */
-	public void ajouterClient(Session session, Client client) {
-
+	public void ajouterClient(Caisse caisse, Client client) {
+		// TODO - implement CaisseControlleur.ajouterClient
+		throw new UnsupportedOperationException();
 	}
 
 }

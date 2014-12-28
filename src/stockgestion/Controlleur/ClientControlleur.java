@@ -10,7 +10,8 @@ public class ClientControlleur {
 	 * @param article
 	 */
 	public void ajouterArticle(Client client, Article article) {
-
+		// TODO - implement ClientControlleur.ajouterArticle
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -18,7 +19,8 @@ public class ClientControlleur {
 	 * @param client
 	 */
 	public void calculerSomme(Client client) {
-
+		// TODO - implement ClientControlleur.calculerSomme
+		throw new UnsupportedOperationException();
 	}
 
 }
