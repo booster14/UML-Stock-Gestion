@@ -1,5 +1,6 @@
 package stockgestion.Controlleur;
 
+import java.util.List;
 import stockgestion.Entite.*;
 
 public class ClientControlleur {
@@ -10,8 +11,7 @@ public class ClientControlleur {
 	 * @param article
 	 */
 	public void ajouterArticle(Client client, Article article) {
-		// TODO - implement ClientControlleur.ajouterArticle
-		throw new UnsupportedOperationException();
+            client.getListArticles().add(article);
 	}
 
 	/**
@@ -19,8 +19,12 @@ public class ClientControlleur {
 	 * @param client
 	 */
 	public void calculerSomme(Client client) {
-		// TODO - implement ClientControlleur.calculerSomme
-		throw new UnsupportedOperationException();
+            double somme = 0;
+            List<Article> listArticles = client.getListArticles();
+            for(Article article: listArticles){
+                somme += article.getPrix() * article.getQuantite();
+            }
+            client.setSomme(somme);
 	}
 
 }

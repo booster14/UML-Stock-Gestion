@@ -36,7 +36,7 @@ public class CaisseControlleur {
      * @param client le client a ajouter a la caisse
      */
     public void ajouterClient(Caisse caisse, Client client) {
-        caisse.getListClients.add(client);
+        caisse.getListClients().add(client);
     }
 
 }
