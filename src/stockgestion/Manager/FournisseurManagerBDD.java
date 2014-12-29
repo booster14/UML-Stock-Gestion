@@ -70,8 +70,20 @@ public class FournisseurManagerBDD extends Manager{
 	 * @param fournisseur
 	 */
 	public void editer(Fournisseur fournisseur) {
-		// TODO - implement FournisseurManagerBDD.editer
-		throw new UnsupportedOperationException();
+            int id = fournisseur.getId();
+            String nom = fournisseur.getNom();
+            String adresse = fournisseur.getAdresse();
+            int codePostal = fournisseur.getCodePostal();
+            int telephone = fournisseur.getNumeroTelephone();
+
+            String query = "UPDATE FOURNISSEUR SET NOM ='"+nom+"',ADRESSE = '"+adresse+"',CODEPOSTAL ="+codePostal+",NUMEROTELEPHONE = "+telephone+" WHERE ID ="+id;
+            PreparedStatement statement;
+            try {
+                statement = connexion.prepareStatement(query);
+                statement.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 	/**
