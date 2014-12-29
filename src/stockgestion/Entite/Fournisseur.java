@@ -1,9 +1,10 @@
 package stockgestion.Entite;
 
 public class Fournisseur {
-    private String nom;
+    
     private int id;
-    private String addresse;
+    private String nom;
+    private String adresse;
     private int codePostal;
     private int numeroTelephone;
 
@@ -23,12 +24,12 @@ public class Fournisseur {
         this.id = id;
     }
 
-    public String getAddresse() {
-        return addresse;
+    public String getAdresse() {
+        return adresse;
     }
 
-    public void setAddresse(String addresse) {
-        this.addresse = addresse;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public int getCodePostal() {
