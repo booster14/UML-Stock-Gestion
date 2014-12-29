@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,8 +105,34 @@ public class FournisseurManagerBDD extends Manager{
 	}
 
 	public List<Fournisseur> getAll() {
-		// TODO - implement FournisseurManagerBDD.getAllFournisseurs
-		throw new UnsupportedOperationException();
+            List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
+           
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID,NOM,ADRESSE,CODEPOSTAL,NUMEROTELEPHONE FROM FOURNISSEUR";
+                ResultSet resultat = statement.executeQuery(string);
+                while(resultat.next()){
+                    Fournisseur fournisseur = new Fournisseur();
+                    int id = resultat.getInt("ID");
+                    String nom = resultat.getString("NOM");
+                    String adresse = resultat.getString("ADRESSE");
+                    int codePostal = resultat.getInt("CODEPOSTAL");
+                    int telephone = resultat.getInt("NUMEROTELEPHONE");
+
+                    fournisseur.setId(id);
+                    fournisseur.setNom(nom);
+                    fournisseur.setAdresse(adresse);
+                    fournisseur.setCodePostal(codePostal);
+                    fournisseur.setNumeroTelephone(telephone);
+                    
+                   listFournisseur.add(fournisseur);
+                }                    
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return listFournisseur;
 	}
 
 }
