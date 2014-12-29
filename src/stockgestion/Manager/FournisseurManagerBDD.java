@@ -61,7 +61,7 @@ public class FournisseurManagerBDD extends Manager{
                 String string = "DELETE FROM FOURNISSEUR WHERE ID = "+id;
                 statement.executeUpdate(string);
             } catch (SQLException ex) {
-                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CommandeManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
             } 
 	}
 

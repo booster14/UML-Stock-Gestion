@@ -81,15 +81,14 @@ public class ArticleManagerBDD extends Manager{
 	 * 
 	 * @param codeBarre
 	 */
-	public Article get(int codeBarre) {
+	public Article get(int id) {
             Article article = new Article();
             
             try { 
                 Statement statement = connexion.createStatement();
-                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE CODEBARRE ="+codeBarre;
+                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE ID ="+id;
                 ResultSet resultat = statement.executeQuery(string);
                 resultat.next();
-                int id = resultat.getInt("ID");
                 String nom = resultat.getString("NOM");
                 int quantite = resultat.getInt("QUANTITE");
                 double prix = resultat.getDouble("PRIX");
