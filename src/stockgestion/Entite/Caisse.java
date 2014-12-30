@@ -1,11 +1,16 @@
 package stockgestion.Entite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Caisse {
 
     private boolean etat;
     private List<Client> listClients;
+    
+    public Caisse(){
+        this.listClients = new ArrayList<Client>();
+    }
 
     public boolean isEtat() {
         return etat;
