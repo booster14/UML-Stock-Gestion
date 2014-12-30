@@ -1,5 +1,7 @@
 package stockgestion.Entite;
 
+import java.util.List;
+
 public class Article {
 
     private int id;
@@ -9,6 +11,15 @@ public class Article {
     private double prix;
     private int seuilDeReassortiment;
     private boolean typeDeVente;
+    private List<Fournisseur> listFournisseur;
+
+    public List<Fournisseur> getListFournisseur() {
+        return listFournisseur;
+    }
+
+    public void setListFournisseur(List<Fournisseur> listFournisseur) {
+        this.listFournisseur = listFournisseur;
+    }
 
     
     public int getId(){

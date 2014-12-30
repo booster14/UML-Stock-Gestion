@@ -68,10 +68,10 @@ public class CommandeManagerBDD extends Manager{
 	 * 
 	 * @param commande
 	 */
-	public void editer(Commande commande) {
+	/*public void editer(Commande commande) {
 		// TODO - implement CommandeManagerBDD.editer
 		throw new UnsupportedOperationException();
-	}
+	}*/
 
 	/**
 	 * 
