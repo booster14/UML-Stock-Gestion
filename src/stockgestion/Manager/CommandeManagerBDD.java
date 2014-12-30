@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,8 +105,36 @@ public class CommandeManagerBDD extends Manager{
 	}
 
 	public List<Commande> getAll() {
-		// TODO - implement CommandeManagerBDD.getAllCommandes
-		throw new UnsupportedOperationException();
+            List<Commande> listcommande = new ArrayList<Commande>();
+            
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID,ID_ARTICLE, QUANTITE, DATE_COMMANDE,MONTANT FROM COMMANDE";
+                ResultSet resultat = statement.executeQuery(string);
+                while(resultat.next()){
+                    int id = resultat.getInt("ID");
+                    int id_article = resultat.getInt("ID_ARTICLE");
+                    int quantite = resultat.getInt("QUANTITE");
+                    String date = resultat.getString("DATE_COMMANDE");
+                    double montant = resultat.getDouble("MONTANT");
+                    Commande commande = new Commande();
+                    
+                    Article article = ArticleManagerBDD.getInstance().get(id_article);
+                    commande.setId(id);
+                    commande.setArticle(article);
+                    commande.setQuantite(quantite);
+                    commande.setDate(date);
+                    commande.setMontant(montant); 
+                    
+                    listcommande.add(commande);
+                }
+                
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return listcommande;
 	}
 
 }
