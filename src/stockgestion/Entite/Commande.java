@@ -1,32 +1,40 @@
 package stockgestion.Entite;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class Commande {
 
     private Article article;
     private int quantite;
-    private String Date;
-    private int montant;
+    private String date;
+    private double montant;
     
     public Commande(){};
     
-    public Commande(Article article, int qantite){
+    public Commande(Article article, int quantite){
         this.article = article;
         this.quantite = quantite;
+        this.montant = quantite * article.getPrix();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        this.date = dateFormat.format(date);
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
-    public void setDate(String Date) {
-        this.Date = Date;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public int getMontant() {
+    public double getMontant() {
         return montant;
     }
 
-    public void setMontant(int montant) {
+    public void setMontant(double montant) {
         this.montant = montant;
     }
 

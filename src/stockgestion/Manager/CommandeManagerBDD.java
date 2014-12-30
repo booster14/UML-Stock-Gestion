@@ -30,13 +30,17 @@ public class CommandeManagerBDD extends Manager{
 	public void ajouter(Commande commande) {
             int id_article = commande.getArticle().getId();
             int quantite = commande.getQuantite();
+            String date = commande.getDate();
+            double montant = commande.getMontant();
 
-            String query = "INSERT INTO COMMANDE(ID_ARTICLE,QUANTITE) VALUES (?,?)";
+            String query = "INSERT INTO COMMANDE(ID_ARTICLE,QUANTITE,DATE_COMMANDE,MONTANT) VALUES (?,?,?,?)";
             PreparedStatement statement;
             try {
                 statement = connexion.prepareStatement(query);
                 statement.setInt(1, id_article);
                 statement.setInt(2, quantite);
+                statement.setString(3,date);
+                statement.setDouble(4,montant);
                 statement.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(CommandeManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,15 +81,19 @@ public class CommandeManagerBDD extends Manager{
             
             try { 
                 Statement statement = connexion.createStatement();
-                String string = "SELECT ID,ID_ARTICLE, QUANTITE WHERE ID ="+id;
+                String string = "SELECT ID,ID_ARTICLE, QUANTITE, DATE_COMMANDE,MONTANT WHERE ID ="+id;
                 ResultSet resultat = statement.executeQuery(string);
                 resultat.next();
                 int id_article = resultat.getInt("ID_ARTICLE");
                 int quantite = resultat.getInt("QUANTITE");
+                String date = resultat.getString("DATE_COMMANDE");
+                double montant = resultat.getDouble("MONTANT");
 
                 Article article = ArticleManagerBDD.getInstance().get(id_article);
                 commande.setArticle(article);
                 commande.setQuantite(quantite);
+                commande.setDate(date);
+                commande.setMontant(montant);
             } 
             catch (SQLException ex) {
                 Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
