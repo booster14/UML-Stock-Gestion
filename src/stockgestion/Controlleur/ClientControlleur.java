@@ -48,7 +48,7 @@ public class ClientControlleur {
         
         // Mise à jour des quantités
          for(Article article : client.getListArticles()){
-            int quantite = article.getQuantite();
+            int quantite = ArticleManagerBDD.getInstance().get(article.getId()).getQuantite(); // récupère la quantité dans le BDD et pas dans l'objet
             article.setQuantite(quantite-1);
             ArticleManagerBDD.getInstance().editer(article);
         }
