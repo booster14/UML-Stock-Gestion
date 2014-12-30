@@ -49,7 +49,20 @@ public class ArticleManagerBDD extends Manager{
                 statement.executeUpdate();
             } catch (SQLException ex) {
                 Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
-            }  
+            }
+            
+            int id = get(article.getNom()).getId();
+            for(Fournisseur fournisseur : article.getListFournisseur()){
+                try{            
+                    query ="INSERT INTO FOURNI(ID_ARTICLE,ID_FOURNISSEUR) VALUES (?,?)";
+                    statement = connexion.prepareStatement(query);
+                    statement.setInt(1,id);
+                    statement.setInt(2,fournisseur.getId());
+                    statement.executeUpdate();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 	}
 
 	/**
@@ -61,7 +74,10 @@ public class ArticleManagerBDD extends Manager{
             
             try {
                 Statement statement = connexion.createStatement();
-                String string = "DELETE FROM ARTICLE WHERE ID = "+id;
+                String string = "DELETE FROM FOURNI WHERE ID_ARTICLE ="+id;
+                statement.executeUpdate(string);
+                
+                string = "DELETE FROM ARTICLE WHERE ID = "+id;
                 statement.executeUpdate(string);
             } catch (SQLException ex) {
                 Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,7 +95,7 @@ public class ArticleManagerBDD extends Manager{
 
 	/**
 	 * 
-	 * @param codeBarre
+	 * @param id
 	 */
 	public Article get(int id) {
             Article article = new Article();
@@ -90,6 +106,38 @@ public class ArticleManagerBDD extends Manager{
                 ResultSet resultat = statement.executeQuery(string);
                 resultat.next();
                 String nom = resultat.getString("NOM");
+                int quantite = resultat.getInt("QUANTITE");
+                double prix = resultat.getDouble("PRIX");
+                int codebarre = resultat.getInt("CODEBARRE");
+                int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
+                boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
+                
+                article.setId(id);
+                article.setNom(nom);
+                article.setQuantite(quantite);
+                article.setPrix(prix);
+                article.setCodeBarre(codebarre);
+                article.setSeuilDeReassortiment(seuilDeReassortiment);
+                article.setTypeDeVente(typeDeVente);
+                article.setListFournisseur(getListFournisseur(id));
+                
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return article;
+	}
+        
+        public Article get(String nom) {
+            Article article = new Article();
+            
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE NOM='"+nom+"'";
+                ResultSet resultat = statement.executeQuery(string);
+                resultat.next();
+                int id = resultat.getInt("ID");
                 int quantite = resultat.getInt("QUANTITE");
                 double prix = resultat.getDouble("PRIX");
                 int codebarre = resultat.getInt("CODEBARRE");
@@ -202,5 +250,4 @@ public class ArticleManagerBDD extends Manager{
             
             return listFournisseur;
         }
-
 }
