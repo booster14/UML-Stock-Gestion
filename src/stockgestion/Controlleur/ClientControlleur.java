@@ -2,6 +2,7 @@ package stockgestion.Controlleur;
 
 import java.util.List;
 import stockgestion.Entite.*;
+import stockgestion.Manager.ArticleManagerBDD;
 
 public class ClientControlleur {
     private static ClientControlleur instance = null;
@@ -16,11 +17,12 @@ public class ClientControlleur {
     }
 
     /**
-     * 
+     * Ajout un article dans la liste des articles du client à partir de l'ID de l'article
      * @param client
-     * @param article
+     * @param id_article
      */
-    public void ajouterArticle(Client client, Article article) {
+    public void ajouterArticle(Client client,int id_article) {
+        Article article = ArticleManagerBDD.getInstance().get(id_article);
         client.getListArticles().add(article);
     }
 
@@ -30,9 +32,9 @@ public class ClientControlleur {
      */
     public void calculerSomme(Client client) {
         double somme = 0;
-        List<Article> listArticles = client.getListArticles();
-        for(Article article: listArticles){
-            somme += article.getPrix() * article.getQuantite();
+        
+        for(Article article : client.getListArticles()){
+            somme += article.getPrix();
         }
         client.setSomme(somme);
     }
