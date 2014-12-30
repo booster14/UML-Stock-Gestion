@@ -4,6 +4,31 @@ public class Commande {
 
     private Article article;
     private int quantite;
+    private String Date;
+    private int montant;
+    
+    public Commande(){};
+    
+    public Commande(Article article, int qantite){
+        this.article = article;
+        this.quantite = quantite;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+
+    public int getMontant() {
+        return montant;
+    }
+
+    public void setMontant(int montant) {
+        this.montant = montant;
+    }
 
     public Article getArticle() {
         return article;
