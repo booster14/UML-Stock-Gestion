@@ -1,6 +1,7 @@
 package stockgestion.Controlleur;
 
 import stockgestion.Entite.*;
+import stockgestion.Manager.ArticleManagerBDD;
 
 public class CaisseControlleur {
     private static CaisseControlleur instance = null;
@@ -37,6 +38,11 @@ public class CaisseControlleur {
      */
     public void ajouterClient(Caisse caisse, Client client) {
         caisse.getListClients().add(client);
+    }
+    
+    public void ajouterArticle(Client client, int id_article){
+        Article article = ArticleManagerBDD.getInstance().get(id_article);
+        client.getListArticles().add(article);
     }
 
 }
