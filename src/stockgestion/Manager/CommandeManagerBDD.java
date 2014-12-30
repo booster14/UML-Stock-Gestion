@@ -81,7 +81,7 @@ public class CommandeManagerBDD extends Manager{
             
             try { 
                 Statement statement = connexion.createStatement();
-                String string = "SELECT ID,ID_ARTICLE, QUANTITE, DATE_COMMANDE,MONTANT WHERE ID ="+id;
+                String string = "SELECT ID,ID_ARTICLE, QUANTITE, DATE_COMMANDE,MONTANT FROM COMMANDE WHERE ID ="+id;
                 ResultSet resultat = statement.executeQuery(string);
                 resultat.next();
                 int id_article = resultat.getInt("ID_ARTICLE");
@@ -90,6 +90,7 @@ public class CommandeManagerBDD extends Manager{
                 double montant = resultat.getDouble("MONTANT");
 
                 Article article = ArticleManagerBDD.getInstance().get(id_article);
+                commande.setId(id);
                 commande.setArticle(article);
                 commande.setQuantite(quantite);
                 commande.setDate(date);
