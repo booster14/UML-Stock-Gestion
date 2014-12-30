@@ -95,14 +95,26 @@ public class ArticleManagerBDD extends Manager{
                 int codebarre = resultat.getInt("CODEBARRE");
                 int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
                 boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
-
+                
+                List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
+                statement = connexion.createStatement();
+                string = "SELECT ID_FOURNISSEUR FROM FOURNI WHERE ID_ARTICLE ="+id;
+                resultat = statement.executeQuery(string);
+                while(resultat.next()){
+                    int id_fournisseur = resultat.getInt("ID_FOURNISSEUR");
+                    Fournisseur fournisseur = FournisseurManagerBDD.getInstance().get(id_fournisseur);
+                    listFournisseur.add(fournisseur);
+                } 
+                
                 article.setId(id);
                 article.setNom(nom);
                 article.setQuantite(quantite);
                 article.setPrix(prix);
                 article.setCodeBarre(codebarre);
                 article.setSeuilDeReassortiment(seuilDeReassortiment);
-                article.setTypeDeVente(typeDeVente);        
+                article.setTypeDeVente(typeDeVente);
+                article.setListFournisseur(listFournisseur);
+                
             } 
             catch (SQLException ex) {
                 Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,6 +139,16 @@ public class ArticleManagerBDD extends Manager{
                     int codebarre = resultat.getInt("CODEBARRE");
                     int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
                     boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
+                    
+                    List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
+                    Statement statement2 = connexion.createStatement();
+                    String req = "SELECT ID_FOURNISSEUR FROM FOURNI WHERE ID_ARTICLE ="+id;
+                    ResultSet resultat2 = statement2.executeQuery(req);
+                    while(resultat2.next()){
+                        int id_fournisseur = resultat2.getInt("ID_FOURNISSEUR");
+                        Fournisseur fournisseur = FournisseurManagerBDD.getInstance().get(id_fournisseur);
+                        listFournisseur.add(fournisseur);
+                    } 
 
                     article.setId(id);
                     article.setNom(nom);
@@ -135,6 +157,7 @@ public class ArticleManagerBDD extends Manager{
                     article.setCodeBarre(codebarre);
                     article.setSeuilDeReassortiment(seuilDeReassortiment);
                     article.setTypeDeVente(typeDeVente);
+                    article.setListFournisseur(listFournisseur);
 
                     listArticle.add(article);
                 }            
