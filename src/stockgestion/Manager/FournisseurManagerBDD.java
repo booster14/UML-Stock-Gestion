@@ -10,6 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import stockgestion.Entite.*;
 
+/**
+ * Manager des Fournisseurs
+ * @author 7h1b0
+ */
 public class FournisseurManagerBDD extends Manager{
 
         private static FournisseurManagerBDD instance = null;
@@ -25,7 +29,7 @@ public class FournisseurManagerBDD extends Manager{
             return instance;
         }
 	/**
-	 * 
+	 * Ajoute un fournisseur dans la base de donnée
 	 * @param fournisseur
 	 */
 	public void ajouter(Fournisseur fournisseur) {
@@ -50,7 +54,7 @@ public class FournisseurManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Supprime un fournisseur de la base de donnée
 	 * @param fournisseur
 	 */
 	public void supprimer(Fournisseur fournisseur) {
@@ -66,7 +70,7 @@ public class FournisseurManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Edite les propriétés d'un fournisseur dans la base de donnée
 	 * @param fournisseur
 	 */
 	public void editer(Fournisseur fournisseur) {
@@ -87,8 +91,9 @@ public class FournisseurManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Retourne un fournisseur à partir de son ID
 	 * @param id
+         * @return Fournisseur
 	 */
 	public Fournisseur get(int id) {
             Fournisseur fournisseur = new Fournisseur();
@@ -116,6 +121,10 @@ public class FournisseurManagerBDD extends Manager{
             return fournisseur;
 	}
 
+        /**
+         * Retourne la liste de tous les fournisseurs
+         * @return List<Fournisseur>
+         */
 	public List<Fournisseur> getAll() {
             List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
            

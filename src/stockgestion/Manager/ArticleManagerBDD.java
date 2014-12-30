@@ -10,6 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import stockgestion.Entite.*;
 
+/**
+ * Manager des Articles
+ * @author 7h1b0
+ */
 public class ArticleManagerBDD extends Manager{
         private static ArticleManagerBDD instance = null;
         
@@ -25,7 +29,7 @@ public class ArticleManagerBDD extends Manager{
         }
 
 	/**
-	 * 
+	 * Ajoute un Article dans la BDD
 	 * @param article
 	 */
 	public void ajouter(Article article) {
@@ -56,7 +60,7 @@ public class ArticleManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Supprime un Article de la base de donnée
 	 * @param article
 	 */
 	public void supprimer(Article article) {
@@ -75,7 +79,7 @@ public class ArticleManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Edite les propriétés d'un Article dans le BDD
 	 * @param article
 	 */
 	public void editer(Article article) {
@@ -113,8 +117,9 @@ public class ArticleManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Retourne un Article à partir de son ID
 	 * @param id
+         * @return Article
 	 */
 	public Article get(int id) {
             Article article = new Article();
@@ -148,6 +153,11 @@ public class ArticleManagerBDD extends Manager{
             return article;
 	}
         
+        /**
+         * Retourne un Article à partir de son nom
+         * @param nom
+         * @return Article
+         */
         public Article get(String nom) {
             Article article = new Article();
             
@@ -180,6 +190,10 @@ public class ArticleManagerBDD extends Manager{
             return article;
 	}
 
+        /** 
+         * Retourne la liste de tous les articles
+         * @return List<Article>
+         */
 	public List<Article> getAll() {
             List<Article> listArticle = new ArrayList<Article>();
 
@@ -215,6 +229,10 @@ public class ArticleManagerBDD extends Manager{
             return listArticle;
 	}
 
+        /**
+         * Retourne la liste de tous les articles dont la quantité est inférieur à seuil de réassortiment
+         * @return List<Article>
+         */
 	public List<Article> getACommander() {
             List<Article> listArticle = new ArrayList<Article>();
 
@@ -250,6 +268,11 @@ public class ArticleManagerBDD extends Manager{
             return listArticle;
 	}
         
+        /**
+         * Retourne les fournisseurs à partir de l'ID d'un article
+         * @param id_article
+         * @return List<Fournisseur>
+         */
         private List<Fournisseur> getListFournisseur(int id_article){
             
             List<Fournisseur> listFournisseur = new ArrayList<Fournisseur>();
@@ -270,6 +293,11 @@ public class ArticleManagerBDD extends Manager{
             return listFournisseur;
         }
         
+        /**
+         * Ajoute des fournisseurs à un article
+         * @param id ( Id de l'article )
+         * @param listFournisseur 
+         */
         private void ajouterFournisseur(int id,List<Fournisseur> listFournisseur){
             PreparedStatement statement;
             

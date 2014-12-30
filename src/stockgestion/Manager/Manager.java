@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockgestion.Manager;
 
 import java.sql.Connection;
@@ -10,12 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ * Classe abstraite permettant au Manager de se connecter à la BDD
  * @author 7h1b0
  */
 public abstract class Manager {
     protected Connection connexion;
     
+    /**
+     * Effectue la connection avec la base de donnée
+     */
     public void connection(){
     
         /* Chargement du driver JDBC */

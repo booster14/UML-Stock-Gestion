@@ -10,6 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import stockgestion.Entite.*;
 
+/**
+ * Manager des Commandes
+ * @author 7h1b0
+ */
 public class CommandeManagerBDD extends Manager{
         private static CommandeManagerBDD instance = null;
     
@@ -25,7 +29,7 @@ public class CommandeManagerBDD extends Manager{
         }
 
 	/**
-	 * 
+	 * Ajoute une commande à la base de donnée
 	 * @param commande
 	 */
 	public void ajouter(Commande commande) {
@@ -49,7 +53,7 @@ public class CommandeManagerBDD extends Manager{
 	}
 
 	/**
-	 * 
+	 * Supprime une Commande de la base de donnée
 	 * @param commande
 	 */
 	public void supprimer(Commande commande) {
@@ -74,7 +78,7 @@ public class CommandeManagerBDD extends Manager{
 	}*/
 
 	/**
-	 * 
+	 * Retourne une Commande à partir de son ID
 	 * @param id
 	 */
 	public Commande get(int id) {
@@ -104,6 +108,10 @@ public class CommandeManagerBDD extends Manager{
             return commande;
 	}
 
+        /**
+         * Retourne la liste de toutes les commandes
+         * @return List<Commande>
+         */
 	public List<Commande> getAll() {
             List<Commande> listcommande = new ArrayList<Commande>();
             
