@@ -52,17 +52,7 @@ public class ArticleManagerBDD extends Manager{
             }
             
             int id = get(article.getNom()).getId();
-            for(Fournisseur fournisseur : article.getListFournisseur()){
-                try{            
-                    query ="INSERT INTO FOURNI(ID_ARTICLE,ID_FOURNISSEUR) VALUES (?,?)";
-                    statement = connexion.prepareStatement(query);
-                    statement.setInt(1,id);
-                    statement.setInt(2,fournisseur.getId());
-                    statement.executeUpdate();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            ajouterFournisseur(id,article.getListFournisseur());
 	}
 
 	/**
@@ -89,8 +79,37 @@ public class ArticleManagerBDD extends Manager{
 	 * @param article
 	 */
 	public void editer(Article article) {
-		// TODO - implement ArticleManagerBDD.editer
-		throw new UnsupportedOperationException();
+            int id = article.getId();
+            String nom = article.getNom();
+            int quantite = article.getQuantite();
+            double prix = article.getPrix();
+            int codeBarre = article.getCodeBarre();
+            int seuilDeReassortiment = article.getSeuilDeReassortiment();
+            boolean typeDeVente = article.isTypeDeVente();
+
+            String query = "UPDATE ARTICLE SET NOM ='"+nom+"',QUANTITE = "+quantite+",PRIX ="+prix+",CODEBARRE = "+codeBarre+",SEUILDEREASSORTIMENT="+seuilDeReassortiment+", TYPEDEVENTE ="+typeDeVente+" WHERE ID ="+id;
+            PreparedStatement statement;
+            try {
+                statement = connexion.prepareStatement(query);
+                statement.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            // -------------------------------------------
+            // Mise à jour des fournisseurs
+            
+            // Suppression des fournisseurs
+            try{
+                Statement statement2 = connexion.createStatement();
+                String string = "DELETE FROM FOURNI WHERE ID_ARTICLE ="+id;
+                statement2.executeUpdate(string);
+            } catch (SQLException ex) {
+                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            
+            // AJout des fournisseurs
+            ajouterFournisseur(id,article.getListFournisseur());
 	}
 
 	/**
@@ -249,5 +268,21 @@ public class ArticleManagerBDD extends Manager{
             }     
             
             return listFournisseur;
+        }
+        
+        private void ajouterFournisseur(int id,List<Fournisseur> listFournisseur){
+            PreparedStatement statement;
+            
+            for(Fournisseur fournisseur : listFournisseur){
+                try{     
+                    String query ="INSERT INTO FOURNI(ID_ARTICLE,ID_FOURNISSEUR) VALUES (?,?)";
+                    statement = connexion.prepareStatement(query);
+                    statement.setInt(1,id);
+                    statement.setInt(2,fournisseur.getId());
+                    statement.executeUpdate();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 }
