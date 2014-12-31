@@ -80,7 +80,7 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="false" title="Nom" type="java.lang.String"/>
                 <Column editable="false" title="Quantite" type="java.lang.Integer"/>
-                <Column editable="true" title="Fournisseur" type="java.lang.String"/>
+                <Column editable="false" title="Fournisseur" type="java.lang.String"/>
                 <Column editable="false" title="Prix unitaire" type="java.lang.Double"/>
               </Table>
             </Property>

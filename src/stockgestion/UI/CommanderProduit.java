@@ -5,8 +5,11 @@
  */
 package stockgestion.UI;
 
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import stockgestion.Entite.*;
 
 /**
  *
@@ -37,6 +40,14 @@ public class CommanderProduit extends javax.swing.JFrame {
                 InterfaceUtilisateur.getInstance().setVisible(true);
             }
         });
+    }
+    
+    public void refreshTable(List<Article> listArticles){
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        for(Article article: listArticles){
+            tableModel.addRow(new Object[] {article.getNom(), article.getQuantite(), article.listFournisseurToString(), article.getPrix()});
+        }
+        table.setModel(tableModel);
     }
 
     /**

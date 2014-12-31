@@ -40,6 +40,7 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
         produitACommander = new javax.swing.JButton();
         inventaire = new javax.swing.JButton();
         ajouterArticle = new javax.swing.JButton();
+        caisse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +50,8 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
 
         ajouterArticle.setText("Ajouter un article");
 
+        caisse.setText("Caisse");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,8 +59,9 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(319, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(ajouterArticle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(caisse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ajouterArticle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(inventaire, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(produitACommander, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(321, 321, 321))
@@ -65,13 +69,15 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(86, 86, 86)
                 .addComponent(produitACommander, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(60, 60, 60)
                 .addComponent(inventaire, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(54, 54, 54)
                 .addComponent(ajouterArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addComponent(caisse, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
@@ -101,6 +107,15 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CommanderProduit.getInstance().setVisible(true);
+                InterfaceUtilisateur.this.setVisible(false);
+            }
+        });
+        
+        caisse.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Caisse.getInstance().setVisible(true);
                 InterfaceUtilisateur.this.setVisible(false);
             }
         });
@@ -137,12 +152,14 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new InterfaceUtilisateur().setVisible(true);
+                stockgestion.StockGestion.getInstance();
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajouterArticle;
+    private javax.swing.JButton caisse;
     private javax.swing.JButton inventaire;
     private javax.swing.JButton produitACommander;
     // End of variables declaration//GEN-END:variables

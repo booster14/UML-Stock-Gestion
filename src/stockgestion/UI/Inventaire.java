@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.*;
 
 /**
@@ -23,7 +22,6 @@ public class Inventaire extends javax.swing.JFrame {
         initComponents();
         addActionListeners();
         setTitle("Inventaire");
-        refreshTable(ArticleControlleur.getInstance().getAllArticles());
     }
     
     public static Inventaire getInstance(){
@@ -83,7 +81,7 @@ public class Inventaire extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
