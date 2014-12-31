@@ -77,4 +77,12 @@ public class Article {
     public void setTypeDeVente(boolean typeDeVente) {
         this.typeDeVente = typeDeVente;
     }
+    
+    public String listFournisseurToString(){
+        String s = "";
+        for(Fournisseur fournisseur : listFournisseur){
+            s += fournisseur.getNom() + ",";
+        }
+        return s;
+    }
 }

@@ -7,6 +7,10 @@ package stockgestion.UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import stockgestion.Controlleur.ArticleControlleur;
+import stockgestion.Entite.*;
 
 /**
  *
@@ -19,6 +23,7 @@ public class Inventaire extends javax.swing.JFrame {
         initComponents();
         addActionListeners();
         setTitle("Inventaire");
+        refreshTable(ArticleControlleur.getInstance().getAllArticles());
     }
     
     public static Inventaire getInstance(){
@@ -33,11 +38,18 @@ public class Inventaire extends javax.swing.JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("coucou");
                 Inventaire.this.setVisible(false);
                 InterfaceUtilisateur.getInstance().setVisible(true);
             }
         });
+    }
+    
+    public void refreshTable(List<Article> listArticles){
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        for(Article article: listArticles){
+            tableModel.addRow(new Object[] {article.getNom(), article.getQuantite(), article.listFournisseurToString(), article.getPrix()});
+        }
+        table.setModel(tableModel);
     }
 
     /**
