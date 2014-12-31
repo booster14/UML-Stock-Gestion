@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,13 +27,177 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="ajouter" alignment="1" min="-2" pref="547" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="back" min="-2" pref="78" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="fournisseurLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="seuilCommanderLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="quantiteLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="prixUnitaireLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="nomLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="codeBarreLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="typeVenteLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="poids" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="unite" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="nom" max="32767" attributes="0"/>
+                              <Component id="prixUnitaire" pref="279" max="32767" attributes="0"/>
+                              <Component id="quantite" pref="279" max="32767" attributes="0"/>
+                              <Component id="codeBarre" pref="279" max="32767" attributes="0"/>
+                              <Component id="seuilCommander" pref="279" max="32767" attributes="0"/>
+                              <Component id="fournisseur" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="134" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="back" min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="typeVenteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="poids" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="unite" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="codeBarreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="codeBarre" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nomLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nom" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="prixUnitaireLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="prixUnitaire" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="quantiteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="quantite" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="seuilCommanderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="seuilCommander" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="fournisseurLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fournisseur" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+              <Component id="ajouter" min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace pref="74" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="typeVenteLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Type de vente"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="poids">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="poids"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="unite">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="unit&#xe9;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="codeBarreLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Code barre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nomLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nom"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="prixUnitaireLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prix unitaire"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="quantiteLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quantit&#xe9;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="seuilCommanderLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Seuil de r&#xe9;approvisionnement"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="fournisseurLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fournisseur"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nom">
+    </Component>
+    <Component class="javax.swing.JTextField" name="prixUnitaire">
+    </Component>
+    <Component class="javax.swing.JTextField" name="codeBarre">
+    </Component>
+    <Component class="javax.swing.JTextField" name="quantite">
+    </Component>
+    <Component class="javax.swing.JTextField" name="seuilCommander">
+    </Component>
+    <Component class="javax.swing.JButton" name="back">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Back"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="ajouter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ajouter"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="fournisseur">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

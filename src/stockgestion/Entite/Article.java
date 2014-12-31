@@ -10,7 +10,7 @@ public class Article {
     private int codeBarre;
     private double prix;
     private int seuilDeReassortiment;
-    private boolean typeDeVente;
+    private boolean typeDeVente; //true=poids, false=unite
     private List<Fournisseur> listFournisseur;
 
     public List<Fournisseur> getListFournisseur() {

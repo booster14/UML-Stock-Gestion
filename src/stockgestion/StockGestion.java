@@ -29,9 +29,8 @@ public class StockGestion {
         commanderProduit = CommanderProduit.getInstance();
         inventaire = Inventaire.getInstance();
         
-        //Initialisation des interfaces
-        refreshInventaire();
-        refreshCommanderProduits();
+        //Initialisation des fenetres
+        refreshUI();
     }
     
     public static StockGestion getInstance(){
@@ -41,11 +40,21 @@ public class StockGestion {
         return instance;
     }
     
-    public void refreshInventaire(){
+    private void refreshInventaire(){
         inventaire.refreshTable(articleControlleur.getAllArticles());
     }
     
-    public void refreshCommanderProduits(){
+    private void refreshCommanderProduits(){
         commanderProduit.refreshTable(articleControlleur.getArticlesACommander());
+    }
+    
+    private void refreshListeFournisseur(){
+        ajouterArticle.refreshListeFournisseur(fournisseurControlleur.getAllFournisseur());
+    }
+    
+    public void refreshUI(){
+        refreshCommanderProduits();
+        refreshInventaire();
+        refreshListeFournisseur();
     }
 }

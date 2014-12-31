@@ -5,16 +5,30 @@
  */
 package stockgestion.UI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import stockgestion.Controlleur.ArticleControlleur;
+import stockgestion.Entite.Article;
+import stockgestion.Entite.Fournisseur;
+
 /**
  *
  * @author rubeus
  */
 public class AjouterArticle extends javax.swing.JFrame {
     private static AjouterArticle instance = null;
+    private ArrayList<Fournisseur> selectedFournisseur = new ArrayList<Fournisseur>();
+    private List<Fournisseur> list;
 
     private AjouterArticle() {
         initComponents();
         setTitle("Ajouter un article");
+        addActionListeners();
     }
     
     public static AjouterArticle getInstance(){
@@ -22,6 +36,59 @@ public class AjouterArticle extends javax.swing.JFrame {
             instance = new AjouterArticle();
         }
         return instance;
+    }
+    
+    private void addActionListeners(){
+        back.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AjouterArticle.this.setVisible(false);
+                InterfaceUtilisateur.getInstance().setVisible(true);
+            }
+        });
+        
+        ajouter.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Ajouter un article dans la BDD
+                Article article = new Article();
+                article.setNom(nom.getText());
+                article.setCodeBarre(Integer.parseInt((codeBarre.getText())));
+                article.setPrix(Integer.parseInt(prixUnitaire.getText()));
+                article.setQuantite(Integer.parseInt(quantite.getText()));
+                article.setSeuilDeReassortiment(Integer.parseInt(seuilCommander.getText()));
+                article.setTypeDeVente(poids.isSelected());
+                article.setListFournisseur(selectedFournisseur);
+                
+                ArticleControlleur.getInstance().ajouter(article);
+                stockgestion.StockGestion.getInstance().refreshUI();
+                
+                //Fermer cette fenetre
+                AjouterArticle.this.setVisible(false);
+                InterfaceUtilisateur.getInstance().setVisible(true);
+            }
+        });
+        
+        fournisseur.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedFournisseur.add(list.get(fournisseur.getSelectedIndex()));
+            }
+        });
+    }
+    
+    public void refreshListeFournisseur(List<Fournisseur> list){
+        this.list = list;
+        Vector comboBoxItems = new Vector();
+        for(Fournisseur f : list){
+            comboBoxItems.add(f.getNom());
+        }
+        DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
+        fournisseur.setModel(model);
+        fournisseur.setSelectedIndex(0);
     }
 
     /**
@@ -33,17 +100,125 @@ public class AjouterArticle extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup = new javax.swing.ButtonGroup();
+        typeVenteLabel = new javax.swing.JLabel();
+        poids = new javax.swing.JRadioButton();
+        unite = new javax.swing.JRadioButton();
+        codeBarreLabel = new javax.swing.JLabel();
+        nomLabel = new javax.swing.JLabel();
+        prixUnitaireLabel = new javax.swing.JLabel();
+        quantiteLabel = new javax.swing.JLabel();
+        seuilCommanderLabel = new javax.swing.JLabel();
+        fournisseurLabel = new javax.swing.JLabel();
+        nom = new javax.swing.JTextField();
+        prixUnitaire = new javax.swing.JTextField();
+        codeBarre = new javax.swing.JTextField();
+        quantite = new javax.swing.JTextField();
+        seuilCommander = new javax.swing.JTextField();
+        back = new javax.swing.JButton();
+        ajouter = new javax.swing.JButton();
+        fournisseur = new javax.swing.JComboBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        typeVenteLabel.setText("Type de vente");
+
+        buttonGroup.add(poids);
+        poids.setText("poids");
+
+        buttonGroup.add(unite);
+        unite.setText("unité");
+
+        codeBarreLabel.setText("Code barre");
+
+        nomLabel.setText("Nom");
+
+        prixUnitaireLabel.setText("Prix unitaire");
+
+        quantiteLabel.setText("Quantité");
+
+        seuilCommanderLabel.setText("Seuil de réapprovisionnement");
+
+        fournisseurLabel.setText("Fournisseur");
+
+        back.setText("Back");
+
+        ajouter.setText("Ajouter");
+
+        fournisseur.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(119, 119, 119)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(fournisseurLabel)
+                                .addComponent(seuilCommanderLabel)
+                                .addComponent(quantiteLabel)
+                                .addComponent(prixUnitaireLabel)
+                                .addComponent(nomLabel)
+                                .addComponent(codeBarreLabel)
+                                .addComponent(typeVenteLabel))
+                            .addGap(74, 74, 74)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(poids)
+                                    .addGap(100, 100, 100)
+                                    .addComponent(unite))
+                                .addComponent(nom)
+                                .addComponent(prixUnitaire, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                                .addComponent(quantite, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                                .addComponent(codeBarre, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                                .addComponent(seuilCommander, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                                .addComponent(fournisseur, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typeVenteLabel)
+                    .addComponent(poids)
+                    .addComponent(unite))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codeBarreLabel)
+                    .addComponent(codeBarre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomLabel)
+                    .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prixUnitaireLabel)
+                    .addComponent(prixUnitaire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quantiteLabel)
+                    .addComponent(quantite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(seuilCommanderLabel)
+                    .addComponent(seuilCommander, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fournisseurLabel)
+                    .addComponent(fournisseur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addComponent(ajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -51,5 +226,23 @@ public class AjouterArticle extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ajouter;
+    private javax.swing.JButton back;
+    private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.JTextField codeBarre;
+    private javax.swing.JLabel codeBarreLabel;
+    private javax.swing.JComboBox fournisseur;
+    private javax.swing.JLabel fournisseurLabel;
+    private javax.swing.JTextField nom;
+    private javax.swing.JLabel nomLabel;
+    private javax.swing.JRadioButton poids;
+    private javax.swing.JTextField prixUnitaire;
+    private javax.swing.JLabel prixUnitaireLabel;
+    private javax.swing.JTextField quantite;
+    private javax.swing.JLabel quantiteLabel;
+    private javax.swing.JTextField seuilCommander;
+    private javax.swing.JLabel seuilCommanderLabel;
+    private javax.swing.JLabel typeVenteLabel;
+    private javax.swing.JRadioButton unite;
     // End of variables declaration//GEN-END:variables
 }
