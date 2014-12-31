@@ -24,6 +24,7 @@ public class FournisseurControlleur {
      * @param fournisseur fournisseur a ajouter dans la BDD
      */
     public void ajouter(Fournisseur fournisseur) {
+        bdd.ajouter(fournisseur);
     }
 
     /**
@@ -31,6 +32,7 @@ public class FournisseurControlleur {
      * @param fournisseur fournisseur a supprimer de la BDD
      */
     public void supprimer(Fournisseur fournisseur) {
+        bdd.supprimer(fournisseur);
     }
 
     /**
@@ -38,10 +40,11 @@ public class FournisseurControlleur {
      * @param fournisseur fournisseur a editer dans la BDD
      */
     public void editer(Fournisseur fournisseur) {
+        bdd.editer(fournisseur);
     }
 
     public List<Fournisseur> getAllFournisseur() {
-        return null;
+        return bdd.getAll();
     }
 
     /**
@@ -49,7 +52,7 @@ public class FournisseurControlleur {
      * @param id id du fournisseur
      */
     public Fournisseur getFournisseur(int id) {
-        return null;
+        return bdd.get(id);
     }
 
 }
