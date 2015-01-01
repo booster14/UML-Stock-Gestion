@@ -8,6 +8,11 @@ package stockgestion.UI;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import stockgestion.Controlleur.CommandeControlleur;
 import stockgestion.Entite.*;
@@ -18,6 +23,7 @@ import stockgestion.Entite.*;
  */
 public class CommanderProduit extends javax.swing.JFrame {
     private static CommanderProduit instance = null;
+    private List<Article> listArticles;
 
     private CommanderProduit() {
         initComponents();
@@ -40,9 +46,36 @@ public class CommanderProduit extends javax.swing.JFrame {
                 InterfaceUtilisateur.getInstance().retournerEcranAccueil(CommanderProduit.this);
             }
         });
+        
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem commander = new JMenuItem("Commander");  
+        JMenuItem annuler = new JMenuItem("Annuler");
+        final JTextField quantite = new JTextField();
+        JLabel texte = new JLabel("Quantité :");
+        commander.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int[] indexes = table.getSelectedRows();
+                for(int i=indexes.length-1; i>=0; i--){
+                    Commande commande = new Commande(listArticles.get(indexes[i]), Integer.parseInt(quantite.getText()));
+                    CommandeControlleur.getInstance().ajouter(commande);
+                }            
+                refreshTable(listArticles);
+            }
+        });
+        popupMenu.add(texte);
+        popupMenu.add(quantite);
+        popupMenu.addSeparator();
+        popupMenu.add(commander);
+        popupMenu.add(annuler);
+        table.setComponentPopupMenu(popupMenu);
     }
     
     public void refreshTable(List<Article> listArticles){
+        this.listArticles = listArticles;
+        
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.setRowCount(0);
         
@@ -67,16 +100,14 @@ public class CommanderProduit extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        back = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        back = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menu = new javax.swing.JMenu();
         menuItemImprimer = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        back.setText("Retouner à l'écran d'accueil");
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,6 +134,8 @@ public class CommanderProduit extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(table);
 
+        back.setText("Retouner à l'écran d'accueil");
+
         menu.setText("Options");
 
         menuItemImprimer.setText("Imprimer la page");
@@ -118,17 +151,17 @@ public class CommanderProduit extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(305, 305, 305)
-                .addComponent(back)
+                .addGap(288, 288, 288)
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(back)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         pack();
