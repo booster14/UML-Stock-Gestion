@@ -40,6 +40,15 @@ public class Inventaire extends javax.swing.JFrame {
                 InterfaceUtilisateur.getInstance().setVisible(true);
             }
         });
+        
+        menuItemAjouterArticle.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Inventaire.this.setVisible(false);
+                AjouterArticle.getInstance().setVisible(true);
+            }
+        });
     }
     
     public void refreshTable(List<Article> listArticles){
@@ -95,7 +104,7 @@ public class Inventaire extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        back.setText("Back");
+        back.setText("Retouner à l'écran d'accueil");
 
         menu.setText("Options");
 
@@ -117,7 +126,7 @@ public class Inventaire extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(back)
-                .addGap(369, 369, 369))
+                .addGap(285, 285, 285))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
