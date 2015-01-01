@@ -13,6 +13,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import stockgestion.Controlleur.CommandeControlleur;
 import stockgestion.Entite.*;
@@ -47,30 +49,78 @@ public class CommanderProduit extends javax.swing.JFrame {
             }
         });
         
-        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        JPopupMenu popupMenu = new JPopupMenu();
-        JMenuItem commander = new JMenuItem("Commander");  
-        JMenuItem annuler = new JMenuItem("Annuler");
+        /**
+         *    Menu click droit
+         */
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JPopupMenu popupMenu = new JPopupMenu();        
         final JTextField quantite = new JTextField();
         JLabel texte = new JLabel("Quantité :");
+        
+        final JMenuItem commander = new JMenuItem("Commander");  
+        JMenuItem annuler = new JMenuItem("Annuler");
+        
         commander.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 int[] indexes = table.getSelectedRows();
                 for(int i=indexes.length-1; i>=0; i--){
+                    System.out.println(quantite.getText());
                     Commande commande = new Commande(listArticles.get(indexes[i]), Integer.parseInt(quantite.getText()));
                     CommandeControlleur.getInstance().ajouter(commande);
                 }            
                 refreshTable(listArticles);
+                quantite.setText("");
             }
-        });
+        });  
+        
+        annuler.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quantite.setText("");
+            }
+        });  
+        
         popupMenu.add(texte);
         popupMenu.add(quantite);
         popupMenu.addSeparator();
         popupMenu.add(commander);
-        popupMenu.add(annuler);
+        popupMenu.add(annuler);        
         table.setComponentPopupMenu(popupMenu);
+        
+        /**
+         *   Selection d'un article dans la liste
+         */
+        produitArrive.setVisible(false);
+        ListSelectionModel selectionModel = table.getSelectionModel();
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int index = table.getSelectedRow();     
+                if(index != -1){
+                    if(CommandeControlleur.getInstance().articleEnCommande(listArticles.get(index))){
+                    produitArrive.setVisible(true);
+                    } else{
+                        produitArrive.setVisible(false);
+                    }
+                }                
+            }
+        });
+        
+        /**
+         *  Declarer que le produit est arrive en stock
+         */
+        produitArrive.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CommandeControlleur.getInstance().updateStockArticleCommande(listArticles.get(table.getSelectedRow()));
+                stockgestion.StockGestion.getInstance().refreshUI();
+            }
+        });
     }
     
     public void refreshTable(List<Article> listArticles){
@@ -103,6 +153,7 @@ public class CommanderProduit extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         back = new javax.swing.JButton();
+        produitArrive = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menu = new javax.swing.JMenu();
         menuItemImprimer = new javax.swing.JMenuItem();
@@ -136,6 +187,8 @@ public class CommanderProduit extends javax.swing.JFrame {
 
         back.setText("Retouner à l'écran d'accueil");
 
+        produitArrive.setText("Produit arrivé");
+
         menu.setText("Options");
 
         menuItemImprimer.setText("Imprimer la page");
@@ -151,16 +204,20 @@ public class CommanderProduit extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(288, 288, 288)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(produitArrive, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(297, 297, 297))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(produitArrive, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -174,6 +231,7 @@ public class CommanderProduit extends javax.swing.JFrame {
     private javax.swing.JMenu menu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemImprimer;
+    private javax.swing.JButton produitArrive;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

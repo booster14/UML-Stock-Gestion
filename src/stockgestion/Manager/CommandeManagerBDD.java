@@ -123,12 +123,13 @@ public class CommandeManagerBDD extends Manager{
                 String string = "SELECT ID,ID_ARTICLE, QUANTITE, DATE_COMMANDE,MONTANT FROM COMMANDE WHERE ID_ARTICLE ="+id;
                 ResultSet resultat = statement.executeQuery(string);
                 resultat.next();
+                int id_commande = resultat.getInt("ID");
                 int id_article = resultat.getInt("ID_ARTICLE");
                 int quantite = resultat.getInt("QUANTITE");
                 String date = resultat.getString("DATE_COMMANDE");
                 double montant = resultat.getDouble("MONTANT");
                 
-                commande.setId(id);
+                commande.setId(id_commande);
                 commande.setArticle(article);
                 commande.setQuantite(quantite);
                 commande.setDate(date);

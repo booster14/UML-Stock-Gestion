@@ -58,4 +58,14 @@ public class CommandeControlleur {
     public Commande getCommandeArticle(Article article){
         return bdd.get(article);
     }
+    
+    public void updateStockArticleCommande(Article article){
+        Commande commande = getCommandeArticle(article);
+        int stockAjoute = commande.getQuantite();
+        article.setQuantite(article.getQuantite() + stockAjoute);
+        
+        ArticleControlleur.getInstance().editer(article);
+        System.out.println("coucou " +commande.getId());
+        bdd.supprimer(commande);
+    }
 }
