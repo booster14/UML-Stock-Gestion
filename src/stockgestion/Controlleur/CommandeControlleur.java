@@ -41,4 +41,21 @@ public class CommandeControlleur {
     public void imprimer(Commande commande) {
     }
 
+    /**
+     * Retourner si un article est en commande ou pas
+     * @param article
+     * @return article en commande ou pas
+     */
+    public boolean articleEnCommande(Article article){
+        return bdd.estCommande(article);
+    }
+    
+    /**
+     * Retourner la commande d'un article
+     * @param article
+     * @return la commande d'un article
+     */
+    public Commande getCommandeArticle(Article article){
+        return bdd.get(article);
+    }
 }

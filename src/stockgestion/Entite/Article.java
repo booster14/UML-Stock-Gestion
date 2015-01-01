@@ -81,8 +81,10 @@ public class Article {
     public String listFournisseurToString(){
         String s = "";
         for(Fournisseur fournisseur : listFournisseur){
-            s += fournisseur.getNom() + ",";
+            s += fournisseur.getNom() + ", ";
         }
+        //Supprimer les 2 derniers caracteres pour supprimer la virgule apres le dernier fournisseur
+        s = s.substring(0,s.length()-2);
         return s;
-    }
+    }    
 }

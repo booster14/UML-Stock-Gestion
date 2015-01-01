@@ -9,6 +9,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
+import stockgestion.Controlleur.CommandeControlleur;
 import stockgestion.Entite.*;
 
 /**
@@ -44,8 +45,15 @@ public class CommanderProduit extends javax.swing.JFrame {
     public void refreshTable(List<Article> listArticles){
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.setRowCount(0);
+        
+        CommandeControlleur controlleur = CommandeControlleur.getInstance();
         for(Article article: listArticles){
-            tableModel.addRow(new Object[] {article.getNom(), article.getQuantite(), article.listFournisseurToString(), article.getPrix()});
+            if(controlleur.articleEnCommande(article)){
+                Commande commande = controlleur.getCommandeArticle(article);
+                tableModel.addRow(new Object[] {article.getNom(), article.getQuantite(), article.listFournisseurToString(), article.getPrix(), commande.getDate(), commande.getMontant()});
+            } else{
+                tableModel.addRow(new Object[] {article.getNom(), article.getQuantite(), article.listFournisseurToString(), article.getPrix()});
+            }
         }
         table.setModel(tableModel);
     }

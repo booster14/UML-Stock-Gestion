@@ -73,7 +73,7 @@ public class CommandeManagerBDD extends Manager{
          * @param id (Id de l'article
          * @return true si commandé, false sinon
          */
-        public Boolean estCommande(int id){
+        public boolean estCommande(int id){
             boolean estCommande = false;
             
             try{
@@ -93,7 +93,7 @@ public class CommandeManagerBDD extends Manager{
          * @param Article
          * @return true si commandé, false sinon
          */
-        public Boolean estCommande(Article article){
+        public boolean estCommande(Article article){
             boolean estCommande = false;
             int id = article.getId();
             
