@@ -53,20 +53,20 @@
                   <Component id="seuilCommander" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" pref="375" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="poids" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="unite" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="poids" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="unite" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="155" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="ajouterFournisseur" min="-2" pref="83" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -112,11 +112,11 @@
                           <Component id="ajouterFournisseur" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="64" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="explainFournisseur" pref="33" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="ajouter" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
@@ -213,7 +213,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="explainFournisseur">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xe9;lection multiple: Ctrl/Maj + souris"/>
+        <Property name="text" type="java.lang.String" value="Multi-s&#xe9;lection: Ctrl/Maj + clic gauche"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ajouterFournisseur">

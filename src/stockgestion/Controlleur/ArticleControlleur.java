@@ -48,7 +48,7 @@ public class ArticleControlleur {
      * @param codeBarre le code barre de l'article
      */
     public Article getArticle(int codeBarre) {
-        return bdd.get(codeBarre); // Pourquoi l'ID ne serait pas le code barre ?
+        return bdd.get(codeBarre); 
     }
 
     public List<Article> getAllArticles() {

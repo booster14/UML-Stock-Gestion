@@ -177,7 +177,7 @@ public class AjouterArticle extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(fournisseur);
 
-        explainFournisseur.setText("Sélection multiple: Ctrl/Maj + souris");
+        explainFournisseur.setText("Multi-sélection: Ctrl/Maj + clic gauche");
 
         ajouterFournisseur.setText("Nouveau");
 
@@ -209,16 +209,17 @@ public class AjouterArticle extends javax.swing.JFrame {
                     .addComponent(seuilCommander)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(explainFournisseur)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(poids)
-                                .addGap(100, 100, 100)
-                                .addComponent(unite)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(poids)
+                        .addGap(100, 100, 100)
+                        .addComponent(unite)
+                        .addGap(0, 155, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(ajouterFournisseur, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(explainFournisseur)
+                .addGap(235, 235, 235))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,10 +259,10 @@ public class AjouterArticle extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ajouterFournisseur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(explainFournisseur)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(explainFournisseur, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(ajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
