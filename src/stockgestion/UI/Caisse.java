@@ -9,7 +9,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.Article;
 import javax.swing.table.DefaultTableModel;
@@ -21,14 +23,14 @@ import javax.swing.table.DefaultTableModel;
 public class Caisse extends javax.swing.JFrame {
     
 private static Caisse instance = null;
-private List<Article> listArticles;
+private HashMap<Article, Integer> listArticles;
 
     private Caisse() {
         initComponents();
         addActionListeners();
         setTitle("Caisse");
         
-        listArticles = new ArrayList<Article>();
+        listArticles = new HashMap<Article, Integer>();
     }
     
     public static Caisse getInstance(){
@@ -67,10 +69,9 @@ private List<Article> listArticles;
                 }else{
                     codeBarreEtat.setForeground(Color.BLACK);
                     codeBarreEtat.setText("Code barre valide");
-                    
+               
+                    updateListArticles(article);
                     updateTable(article);
-                    
-                    listArticles.add(article);
                     updateTotal();
                 } 
             }
@@ -79,16 +80,31 @@ private List<Article> listArticles;
         
     }
     
-    private void updateTable(Article article){
+    private void updateListArticles(Article article){
+        for(Entry <Article, Integer> entry : listArticles.entrySet()){
+            if(entry.getKey().getId() == article.getId()){
+                entry.setValue(entry.getValue() + 1);
+                return;
+            }
+        }
         
+        listArticles.put(article, 1);
+        
+    }
+    
+    private void updateTable(Article article){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{article.getNom(), 1, article.getPrix()});
+        model.setRowCount(0);
+        for(Entry <Article, Integer> entry : listArticles.entrySet()){
+            model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
+        }
+        table.setModel(model);
     }
     
     private void updateTotal(){
         double somme = 0;
-        for(Article a : listArticles){
-            somme += a.getPrix();
+        for(Entry <Article, Integer> entry : listArticles.entrySet()){
+            somme += entry.getKey().getPrix() * entry.getValue();
         }
         total.setText(String.valueOf(somme));
     }
@@ -129,14 +145,14 @@ private List<Article> listArticles;
 
             },
             new String [] {
-                "Article", "Quantité", "Prix"
+                "Article", "Quantité", "Prix Unitaire"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
