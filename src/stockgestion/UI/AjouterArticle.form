@@ -63,7 +63,9 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="ajouterFournisseur" min="-2" pref="83" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -109,9 +111,10 @@
                   <Component id="seuilCommander" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="ajouterFournisseur" max="32767" attributes="0"/>
                   <Component id="fournisseurLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="64" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="64" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
@@ -213,6 +216,11 @@
     <Component class="javax.swing.JLabel" name="explainFournisseur">
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#xe9;lection multiple: Ctrl/Maj + souris"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="ajouterFournisseur">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nouveau"/>
       </Properties>
     </Component>
   </SubComponents>
