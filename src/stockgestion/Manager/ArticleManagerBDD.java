@@ -154,6 +154,43 @@ public class ArticleManagerBDD extends Manager{
 	}
         
         /**
+	 * Retourne un Article à partir de son Code barre
+	 * @param codebarre
+         * @return Article
+	 */
+	public Article getByCodebarre(int codebarre) {
+            Article article = new Article();
+            
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID,NOM,QUANTITE,PRIX,CODEBARRE,SEUILDEREASSORTIMENT, TYPEDEVENTE FROM ARTICLE WHERE CODEBARRE ="+codebarre;
+                ResultSet resultat = statement.executeQuery(string);
+                resultat.next();
+                int id = resultat.getInt("ID");
+                String nom = resultat.getString("NOM");
+                int quantite = resultat.getInt("QUANTITE");
+                double prix = resultat.getDouble("PRIX");
+                int seuilDeReassortiment = resultat.getInt("SEUILDEREASSORTIMENT");
+                boolean typeDeVente = resultat.getBoolean("TYPEDEVENTE");
+                
+                article.setId(id);
+                article.setNom(nom);
+                article.setQuantite(quantite);
+                article.setPrix(prix);
+                article.setCodeBarre(codebarre);
+                article.setSeuilDeReassortiment(seuilDeReassortiment);
+                article.setTypeDeVente(typeDeVente);
+                article.setListFournisseur(getListFournisseur(id));
+                
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(ArticleManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return article;
+	}
+        
+        /**
          * Retourne un Article à partir de son nom
          * @param nom
          * @return Article

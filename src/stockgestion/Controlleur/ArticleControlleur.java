@@ -45,10 +45,18 @@ public class ArticleControlleur {
 
     /**
      * 
+     * @param id l'id de l'article
+     */
+    public Article getArticle(int id) {
+        return bdd.get(id);
+    }
+    
+    /**
+     * 
      * @param codeBarre le code barre de l'article
      */
-    public Article getArticle(int codeBarre) {
-        return bdd.get(codeBarre); 
+    public Article getArticleByCodebarre(int codeBarre) {
+        return bdd.getByCodebarre(codeBarre);
     }
 
     public List<Article> getAllArticles() {

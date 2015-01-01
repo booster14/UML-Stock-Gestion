@@ -67,14 +67,15 @@ private Article article;
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                article = null;
                 for(Article a : ArticleControlleur.getInstance().getAllArticles()){
-                    if(a.getId() == Integer.parseInt(codeBarre.getText())){
-                        article = ArticleControlleur.getInstance().getArticle(Integer.parseInt(codeBarre.getText()));
+                    if((codeBarre.getText() != "") && (codeBarre.getText() != null) && (a.getCodeBarre()== Integer.parseInt(codeBarre.getText()))){
+                        article = ArticleControlleur.getInstance().getArticleByCodebarre(Integer.parseInt(codeBarre.getText()));
                         break;
                     }
+                    
                 }
-
+                
                 if(article == null){
                     codeBarreEtat.setForeground(Color.red);
                     codeBarreEtat.setText("Code barre non reconnu");
