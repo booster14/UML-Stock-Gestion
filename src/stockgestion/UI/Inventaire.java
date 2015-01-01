@@ -44,6 +44,7 @@ public class Inventaire extends javax.swing.JFrame {
     
     public void refreshTable(List<Article> listArticles){
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        tableModel.setRowCount(0);
         for(Article article: listArticles){
             tableModel.addRow(new Object[] {article.getNom(), article.getQuantite(), article.listFournisseurToString(), article.getPrix()});
         }

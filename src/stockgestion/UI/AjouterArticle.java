@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.Article;
 import stockgestion.Entite.Fournisseur;
@@ -22,12 +23,13 @@ import stockgestion.Entite.Fournisseur;
  */
 public class AjouterArticle extends javax.swing.JFrame {
     private static AjouterArticle instance = null;
-    private ArrayList<Fournisseur> selectedFournisseur = new ArrayList<Fournisseur>();
-    private List<Fournisseur> list;
-
+    private ArrayList<Fournisseur> selectedFournisseur;
+    private List<Fournisseur> listFournisseur;
+    
     private AjouterArticle() {
         initComponents();
         setTitle("Ajouter un article");
+        selectedFournisseur = new ArrayList<>();
         addActionListeners();
     }
     
@@ -65,30 +67,47 @@ public class AjouterArticle extends javax.swing.JFrame {
                 ArticleControlleur.getInstance().ajouter(article);
                 stockgestion.StockGestion.getInstance().refreshUI();
                 
+                resetUI();
+                
                 //Fermer cette fenetre
                 AjouterArticle.this.setVisible(false);
                 InterfaceUtilisateur.getInstance().setVisible(true);
             }
         });
         
-        fournisseur.addActionListener(new ActionListener() {
+        fournisseur.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        fournisseur.addListSelectionListener(new ListSelectionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                selectedFournisseur.add(list.get(fournisseur.getSelectedIndex()));
+            public void valueChanged(ListSelectionEvent e) {
+                int[] indexes = fournisseur.getSelectedIndices();
+                selectedFournisseur.clear();
+                for(int i=0; i<indexes.length; i++){
+                    selectedFournisseur.add(listFournisseur.get(indexes[i]));
+                }
+
             }
         });
     }
     
     public void refreshListeFournisseur(List<Fournisseur> list){
-        this.list = list;
-        Vector comboBoxItems = new Vector();
+        this.listFournisseur = list;
+        DefaultListModel model = new DefaultListModel();
         for(Fournisseur f : list){
-            comboBoxItems.add(f.getNom());
+            model.addElement(f.getNom());
         }
-        DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems);
         fournisseur.setModel(model);
-        fournisseur.setSelectedIndex(0);
+    }
+    
+    private void resetUI(){
+        nom.setText("");
+        codeBarre.setText("");
+        prixUnitaire.setText("");
+        quantite.setText("");
+        seuilCommander.setText("");
+        poids.setText("");        
+        buttonGroup.clearSelection();
+        fournisseur.clearSelection();
     }
 
     /**
@@ -117,7 +136,9 @@ public class AjouterArticle extends javax.swing.JFrame {
         seuilCommander = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         ajouter = new javax.swing.JButton();
-        fournisseur = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        fournisseur = new javax.swing.JList();
+        explainFournisseur = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,19 +166,21 @@ public class AjouterArticle extends javax.swing.JFrame {
 
         ajouter.setText("Ajouter");
 
-        fournisseur.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jScrollPane1.setViewportView(fournisseur);
+
+        explainFournisseur.setText("Sélection multiple: Ctrl/Maj + souris");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ajouter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(119, 119, 119)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -169,18 +192,22 @@ public class AjouterArticle extends javax.swing.JFrame {
                                 .addComponent(codeBarreLabel)
                                 .addComponent(typeVenteLabel))
                             .addGap(74, 74, 74)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(poids)
-                                    .addGap(100, 100, 100)
-                                    .addComponent(unite))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(nom)
-                                .addComponent(prixUnitaire, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                                .addComponent(quantite, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                                .addComponent(codeBarre, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                                .addComponent(seuilCommander, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                                .addComponent(fournisseur, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(134, Short.MAX_VALUE))
+                                .addComponent(prixUnitaire)
+                                .addComponent(quantite)
+                                .addComponent(codeBarre)
+                                .addComponent(seuilCommander)
+                                .addComponent(jScrollPane1)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(explainFournisseur)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(poids)
+                                            .addGap(100, 100, 100)
+                                            .addComponent(unite)))
+                                    .addGap(0, 0, Short.MAX_VALUE))))))
+                .addGap(186, 186, 186))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,13 +239,15 @@ public class AjouterArticle extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seuilCommanderLabel)
                     .addComponent(seuilCommander, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fournisseurLabel)
-                    .addComponent(fournisseur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(explainFournisseur)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(ajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -231,8 +260,10 @@ public class AjouterArticle extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField codeBarre;
     private javax.swing.JLabel codeBarreLabel;
-    private javax.swing.JComboBox fournisseur;
+    private javax.swing.JLabel explainFournisseur;
+    private javax.swing.JList fournisseur;
     private javax.swing.JLabel fournisseurLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nom;
     private javax.swing.JLabel nomLabel;
     private javax.swing.JRadioButton poids;
