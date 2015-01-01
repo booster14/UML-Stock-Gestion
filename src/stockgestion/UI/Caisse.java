@@ -8,6 +8,8 @@ package stockgestion.UI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,13 +26,23 @@ public class Caisse extends javax.swing.JFrame {
     
 private static Caisse instance = null;
 private HashMap<Article, Integer> listArticles;
+private HashMap<Article, Integer> listTotalArticles;
+private boolean tiroirOuvert;
+private boolean retourBool;
+private boolean totalBool;
+private Article article;
 
     private Caisse() {
         initComponents();
         addActionListeners();
         setTitle("Caisse");
-        
+
+        totalBool = false;
+        retourBool = false;
+        tiroirOuvert = false;
+        tiroirButton.setText("Fermé");
         listArticles = new HashMap<Article, Integer>();
+        listTotalArticles = new HashMap<Article, Integer>();
     }
     
     public static Caisse getInstance(){
@@ -41,6 +53,7 @@ private HashMap<Article, Integer> listArticles;
     }
     
     private void addActionListeners(){
+        
         back.addActionListener(new ActionListener() {
 
             @Override
@@ -54,7 +67,7 @@ private HashMap<Article, Integer> listArticles;
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Article article = null;
+                
                 for(Article a : ArticleControlleur.getInstance().getAllArticles()){
                     if(a.getId() == Integer.parseInt(codeBarre.getText())){
                         article = ArticleControlleur.getInstance().getArticle(Integer.parseInt(codeBarre.getText()));
@@ -68,16 +81,86 @@ private HashMap<Article, Integer> listArticles;
                     
                 }else{
                     codeBarreEtat.setForeground(Color.BLACK);
-                    codeBarreEtat.setText("Code barre valide");
-               
-                    updateListArticles(article);
-                    updateTable(article);
-                    updateTotal();
+                    codeBarreEtat.setText(article.getNom() + "\t\t" + article.getPrix());
+                    if(retourBool){
+                        ouvrirTiroir();
+                    }else{
+                        updateListArticles(article);
+                        updateTable();
+                        updateTotal();
+                    }
                 } 
             }
         });
         
+        totalButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ouvrirTiroir();
+            }
+            
+            
+        });
         
+        totalButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                if(e.getClickCount()==2){
+                    totalBool = true;
+                    ouvrirTiroir();
+                    System.out.println("coucou");
+                }
+    }
+});
+        
+        tiroirButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(tiroirOuvert) // fermeture du tiroir
+                {
+                    fermerTiroir();
+                    codeBarre.setText(null);
+                    codeBarreEtat.setText(null);
+                    if(retourBool){
+                        returnArticle(article);
+                        retourBool = false;
+                        retourArticle.setForeground(Color.black);
+                        
+                    }else if(totalBool){
+                        System.out.println("batard");
+                        totalBool = false;
+                        end();
+                    }else{
+                        total.setText(null);
+                        resetTable();
+                        updateArticles();
+                        updateListTotalArticles();
+                        resetListArticles();
+                    }
+                }
+            }
+        });
+        
+        retourArticle.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                retourBool = true;
+                retourArticle.setForeground(Color.red);
+            }
+        });
+    }
+    
+    private void ouvrirTiroir(){
+        tiroirOuvert = true;
+        tiroirButton.setText("Ouvert");
+    }
+    
+    private void fermerTiroir(){
+        tiroirOuvert = false;
+        tiroirButton.setText("Fermé");
     }
     
     private void updateListArticles(Article article){
@@ -89,10 +172,13 @@ private HashMap<Article, Integer> listArticles;
         }
         
         listArticles.put(article, 1);
-        
     }
     
-    private void updateTable(Article article){
+    private void resetListArticles(){
+        listArticles.clear();
+    }
+    
+    private void updateTable(){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         for(Entry <Article, Integer> entry : listArticles.entrySet()){
@@ -101,9 +187,54 @@ private HashMap<Article, Integer> listArticles;
         table.setModel(model);
     }
     
+    private void resetTable(){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        table.setModel(model);
+    }
+    
+    private void updateArticles(){
+        for(Entry <Article, Integer> entry : listArticles.entrySet()){
+            entry.getKey().setQuantite(entry.getKey().getQuantite() - entry.getValue());
+            ArticleControlleur.getInstance().editer(entry.getKey());
+        }
+    }
+    
+    private void returnArticle(Article article){
+        int quantite = article.getQuantite()+1;
+        article.setQuantite(quantite);
+        ArticleControlleur.getInstance().editer(article);
+        
+        // et on ajoute la modif dans la listTotalArticles
+        listTotalArticles.put(article, -1);
+    }
+    
     private void updateTotal(){
         double somme = 0;
         for(Entry <Article, Integer> entry : listArticles.entrySet()){
+            somme += entry.getKey().getPrix() * entry.getValue();
+        }
+        total.setText(String.valueOf(somme));
+    }
+    
+    private void updateListTotalArticles(){
+        for(Entry <Article, Integer> entry : listArticles.entrySet()){
+            listTotalArticles.put(entry.getKey(), entry.getValue());
+        }
+    }
+    
+    private void end(){
+        //affichage de l'ensemble de transactions effectuées
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for(Entry <Article, Integer> entry : listTotalArticles.entrySet()){
+            model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
+        }
+        table.setModel(model);
+        
+        //affichage du total
+        double somme = 0;
+        for(Entry <Article, Integer> entry : listTotalArticles.entrySet()){
             somme += entry.getKey().getPrix() * entry.getValue();
         }
         total.setText(String.valueOf(somme));
@@ -129,6 +260,8 @@ private HashMap<Article, Integer> listArticles;
         codeBarreEtat = new javax.swing.JTextField();
         total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        tiroirButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,6 +313,8 @@ private HashMap<Article, Integer> listArticles;
 
         jLabel1.setText("Total");
 
+        jLabel2.setText("Tiroir");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,24 +325,29 @@ private HashMap<Article, Integer> listArticles;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(totalButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(retourArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addComponent(codeBarreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(codeBarreEtat)
-                            .addComponent(codeBarre, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(codeBarre, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(codeBarreEtat)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(tiroirButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(totalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -230,10 +370,13 @@ private HashMap<Article, Integer> listArticles;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(4, 4, 4)
-                .addComponent(totalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tiroirButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
@@ -281,9 +424,11 @@ private HashMap<Article, Integer> listArticles;
     private javax.swing.JLabel codeBarreLabel;
     private javax.swing.JButton enter;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton retourArticle;
     private javax.swing.JTable table;
+    private javax.swing.JButton tiroirButton;
     private javax.swing.JTextField total;
     private javax.swing.JButton totalButton;
     // End of variables declaration//GEN-END:variables
