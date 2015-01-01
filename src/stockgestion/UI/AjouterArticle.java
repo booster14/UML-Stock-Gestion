@@ -70,8 +70,7 @@ public class AjouterArticle extends javax.swing.JFrame {
                 resetUI();
                 
                 //Fermer cette fenetre
-                AjouterArticle.this.setVisible(false);
-                InterfaceUtilisateur.getInstance().setVisible(true);
+                InterfaceUtilisateur.getInstance().retournerEcranAccueil(AjouterArticle.this);
             }
         });
         

@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.ListSelectionModel;
+import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.*;
 
 /**
@@ -17,6 +21,7 @@ import stockgestion.Entite.*;
  */
 public class Inventaire extends javax.swing.JFrame {
     private static Inventaire instance = null;
+    private List<Article> listArticles;
 
     private Inventaire() {
         initComponents();
@@ -36,8 +41,7 @@ public class Inventaire extends javax.swing.JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Inventaire.this.setVisible(false);
-                InterfaceUtilisateur.getInstance().setVisible(true);
+                InterfaceUtilisateur.getInstance().retournerEcranAccueil(Inventaire.this);
             }
         });
         
@@ -49,9 +53,28 @@ public class Inventaire extends javax.swing.JFrame {
                 AjouterArticle.getInstance().setVisible(true);
             }
         });
+        
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem deleteItem = new JMenuItem("Supprimer");
+        deleteItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int[] indexes = table.getSelectedRows();
+                for(int i=indexes.length-1; i>=0; i--){
+                    ArticleControlleur.getInstance().supprimer(listArticles.get(indexes[i]));
+                    listArticles.remove(indexes[i]);
+                }
+                refreshTable(listArticles);
+            }
+        });
+        popupMenu.add(deleteItem);
+        table.setComponentPopupMenu(popupMenu);
     }
     
     public void refreshTable(List<Article> listArticles){
+        this.listArticles = listArticles;
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.setRowCount(0);
         for(Article article: listArticles){

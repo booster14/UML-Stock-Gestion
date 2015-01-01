@@ -7,6 +7,7 @@ package stockgestion.UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
 /**
  *
@@ -119,6 +120,12 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
                 InterfaceUtilisateur.this.setVisible(false);
             }
         });
+    }
+    
+    public void retournerEcranAccueil(JFrame frame){
+        frame.setVisible(false);
+        this.setVisible(true);
+        stockgestion.StockGestion.getInstance().refreshUI();
     }
     
     /**
