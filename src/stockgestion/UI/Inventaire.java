@@ -70,6 +70,18 @@ public class Inventaire extends javax.swing.JFrame {
             }
         });
         popupMenu.add(deleteItem);
+        
+        JMenuItem viewItem = new JMenuItem("Consulter l'article");
+        viewItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Inventaire.this.setVisible(false);
+                ViewArticle.getInstance().viewArticleMode(listArticles.get(table.getSelectedRow()));
+                ViewArticle.getInstance().setVisible(true);
+            }
+        });
+        popupMenu.add(viewItem);
         table.setComponentPopupMenu(popupMenu);
     }
     

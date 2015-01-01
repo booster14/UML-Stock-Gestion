@@ -2,6 +2,8 @@ package stockgestion;
 
 import stockgestion.Controlleur.*;
 import stockgestion.UI.*;
+import stockgestion.Entite.Fournisseur;
+import java.util.List;
 
 public class StockGestion {
     private static StockGestion instance = null;
@@ -16,6 +18,7 @@ public class StockGestion {
     private Caisse caisse;
     private CommanderProduit commanderProduit;
     private Inventaire inventaire;
+    private ViewArticle viewArticle;
     
     private StockGestion(){
         articleControlleur = ArticleControlleur.getInstance();
@@ -28,6 +31,7 @@ public class StockGestion {
         caisse = Caisse.getInstance();
         commanderProduit = CommanderProduit.getInstance();
         inventaire = Inventaire.getInstance();
+        viewArticle = ViewArticle.getInstance();
         
         //Initialisation des fenetres
         refreshUI();
@@ -49,7 +53,9 @@ public class StockGestion {
     }
     
     private void refreshListeFournisseur(){
-        ajouterArticle.refreshListeFournisseur(fournisseurControlleur.getAllFournisseur());
+        List<Fournisseur> list = fournisseurControlleur.getAllFournisseur();
+        ajouterArticle.refreshListeFournisseur(list);
+        viewArticle.refreshListeFournisseur(list);
     }
     
     public void refreshUI(){

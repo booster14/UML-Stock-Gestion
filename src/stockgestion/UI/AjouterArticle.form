@@ -28,49 +28,45 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="back" min="-2" pref="210" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="fournisseurLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="seuilCommanderLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="quantiteLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="prixUnitaireLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="codeBarreLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="typeVenteLabel" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ajouter" alignment="1" min="-2" pref="547" max="-2" attributes="0"/>
+                  <Component id="ajouter" max="32767" attributes="0"/>
+                  <Component id="nom" max="32767" attributes="0"/>
+                  <Component id="prixUnitaire" max="32767" attributes="0"/>
+                  <Component id="quantite" max="32767" attributes="0"/>
+                  <Component id="codeBarre" max="32767" attributes="0"/>
+                  <Component id="seuilCommander" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="375" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="fournisseurLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="seuilCommanderLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="quantiteLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="prixUnitaireLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="nomLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="codeBarreLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="typeVenteLabel" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nom" max="32767" attributes="0"/>
-                          <Component id="prixUnitaire" max="32767" attributes="0"/>
-                          <Component id="quantite" max="32767" attributes="0"/>
-                          <Component id="codeBarre" max="32767" attributes="0"/>
-                          <Component id="seuilCommander" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" pref="279" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="poids" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                      <Component id="unite" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="poids" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="unite" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="ajouterFournisseur" min="-2" pref="83" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="back" min="-2" pref="210" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,47 +76,49 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="back" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="typeVenteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="poids" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="unite" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="typeVenteLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="codeBarreLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="nomLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="prixUnitaireLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="quantiteLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="seuilCommanderLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="fournisseurLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="poids" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="unite" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="codeBarre" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="nom" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="prixUnitaire" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="quantite" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="seuilCommander" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="ajouterFournisseur" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="64" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="codeBarreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="codeBarre" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nomLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nom" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="prixUnitaireLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="prixUnitaire" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="quantiteLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="quantite" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="seuilCommanderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="seuilCommander" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="ajouterFournisseur" max="32767" attributes="0"/>
-                  <Component id="fournisseurLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="64" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="explainFournisseur" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="55" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="ajouter" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
