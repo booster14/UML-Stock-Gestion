@@ -67,19 +67,85 @@ public class CommandeManagerBDD extends Manager{
                 Logger.getLogger(CommandeManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
             } 
 	}
-
-	/**
-	 * 
-	 * @param commande
+        
+        /**
+         * Détermine si un article est en commande ou non
+         * @param id (Id de l'article
+         * @return true si commandé, false sinon
+         */
+        public Boolean estCommande(int id){
+            boolean estCommande = false;
+            
+            try{
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID FROM COMMANDE WHERE ID_ARTICLE ="+id;
+                ResultSet resultat = statement.executeQuery(string);
+                estCommande = resultat.next();
+            }catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return estCommande;
+        }
+        
+        /**
+         * Détermine si un article est en commande ou non
+         * @param Article
+         * @return true si commandé, false sinon
+         */
+        public Boolean estCommande(Article article){
+            boolean estCommande = false;
+            int id = article.getId();
+            
+            try{
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID FROM COMMANDE WHERE ID_ARTICLE ="+id;
+                ResultSet resultat = statement.executeQuery(string);
+                estCommande = resultat.next();
+            }catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return estCommande;
+        }
+        
+        /**
+	 * Retourne la commande d'un article
+	 * @param article
+         * @return Commande
 	 */
-	/*public void editer(Commande commande) {
-		// TODO - implement CommandeManagerBDD.editer
-		throw new UnsupportedOperationException();
-	}*/
+	public Commande get(Article article) {
+            Commande commande = new Commande();
+            int id = article.getId();
+            
+            try { 
+                Statement statement = connexion.createStatement();
+                String string = "SELECT ID,ID_ARTICLE, QUANTITE, DATE_COMMANDE,MONTANT FROM COMMANDE WHERE ID_ARTICLE ="+id;
+                ResultSet resultat = statement.executeQuery(string);
+                resultat.next();
+                int id_article = resultat.getInt("ID_ARTICLE");
+                int quantite = resultat.getInt("QUANTITE");
+                String date = resultat.getString("DATE_COMMANDE");
+                double montant = resultat.getDouble("MONTANT");
+                
+                commande.setId(id);
+                commande.setArticle(article);
+                commande.setQuantite(quantite);
+                commande.setDate(date);
+                commande.setMontant(montant);
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(FournisseurManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return commande;
+	}
+        
 
 	/**
 	 * Retourne une Commande à partir de son ID
-	 * @param id
+	 * @param id ( ID de la commande )
+         * @return Commande
 	 */
 	public Commande get(int id) {
             Commande commande = new Commande();
