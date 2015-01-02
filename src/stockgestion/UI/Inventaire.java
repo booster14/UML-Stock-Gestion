@@ -58,6 +58,10 @@ public class Inventaire extends javax.swing.JFrame {
         table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem deleteItem = new JMenuItem("Supprimer");
+        JMenuItem viewItem = new JMenuItem("Consulter l'article");
+        popupMenu.add(deleteItem);
+        popupMenu.add(viewItem);
+        table.setComponentPopupMenu(popupMenu);        
         deleteItem.addActionListener(new ActionListener() {
 
             @Override
@@ -69,10 +73,7 @@ public class Inventaire extends javax.swing.JFrame {
                 }
                 refreshTable(listArticles);
             }
-        });
-        popupMenu.add(deleteItem);
-        
-        JMenuItem viewItem = new JMenuItem("Consulter l'article");
+        });  
         viewItem.addActionListener(new ActionListener() {
 
             @Override
@@ -82,8 +83,26 @@ public class Inventaire extends javax.swing.JFrame {
                 ViewArticle.getInstance().setVisible(true);
             }
         });
-        popupMenu.add(viewItem);
-        table.setComponentPopupMenu(popupMenu);
+        
+        menuItemImprimer.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Imprimer i = Imprimer.getInstance();
+                i.newPage("Inventaire");
+                
+                for(Article article : listArticles){
+                    i.println("Nom d'article: "+article.getNom());
+                    i.println("Code barre: "+article.getCodeBarre());
+                    i.println("Prix unitaire: "+article.getPrix());
+                    i.println("Quantité en stock: "+article.getQuantite());
+                    i.println("Fournisseurs: "+article.listFournisseurToString());
+                    i.println("Seuil de réassortiment: "+article.getSeuilDeReassortiment());
+                    i.println("Type de vente: "+ (article.isTypeDeVente()?"poids":"unité") );
+                    i.println("");
+                }
+            }
+        });
     }
     
     public void refreshTable(List<Article> listArticles){
