@@ -5,6 +5,7 @@
  */
 package stockgestion.UI;
 
+import java.awt.Color;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import stockgestion.Controlleur.CommandeControlleur;
 import stockgestion.Entite.*;
+import stockgestion.Outil.Verificateur;
 
 /**
  *
@@ -55,26 +57,29 @@ public class CommanderProduit extends javax.swing.JFrame {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JPopupMenu popupMenu = new JPopupMenu();        
         final JTextField quantite = new JTextField();
-        JLabel texte = new JLabel("Quantité :");
-        
+        JLabel texte = new JLabel("Quantité :");        
         final JMenuItem commander = new JMenuItem("Commander");  
         JMenuItem annuler = new JMenuItem("Annuler");
-        
+        popupMenu.add(texte);
+        popupMenu.add(quantite);
+        popupMenu.addSeparator();
+        popupMenu.add(commander);
+        popupMenu.add(annuler);        
+        table.setComponentPopupMenu(popupMenu);        
         commander.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] indexes = table.getSelectedRows();
-                for(int i=indexes.length-1; i>=0; i--){
-                    System.out.println(quantite.getText());
-                    Commande commande = new Commande(listArticles.get(indexes[i]), Integer.parseInt(quantite.getText()));
+                int index = table.getSelectedRow();
+                if(Verificateur.isValidInt(quantite.getText()) && Verificateur.isValidSelectionTable(table)){
+                    Commande commande = new Commande(listArticles.get(index), Integer.parseInt(quantite.getText()));
                     CommandeControlleur.getInstance().ajouter(commande);
-                }            
-                refreshTable(listArticles);
-                quantite.setText("");
+                    
+                    refreshTable(listArticles);
+                    quantite.setText("");
+                } 
             }
-        });  
-        
+        });          
         annuler.addActionListener(new ActionListener() {
 
             @Override
@@ -82,13 +87,6 @@ public class CommanderProduit extends javax.swing.JFrame {
                 quantite.setText("");
             }
         });  
-        
-        popupMenu.add(texte);
-        popupMenu.add(quantite);
-        popupMenu.addSeparator();
-        popupMenu.add(commander);
-        popupMenu.add(annuler);        
-        table.setComponentPopupMenu(popupMenu);
         
         /**
          *   Selection d'un article dans la liste

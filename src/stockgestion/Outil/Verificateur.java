@@ -3,6 +3,7 @@ package stockgestion.Outil;
 import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class Verificateur {
@@ -34,6 +35,10 @@ public class Verificateur {
     
     public static boolean isValidSelection(JList list){
         return list.getSelectedIndices().length > 0;
+    }
+    
+    public static boolean isValidSelectionTable(JTable table){
+        return table.getSelectedRows().length > 0;
     }
     
     //Mettre le champs non valide en rouge
