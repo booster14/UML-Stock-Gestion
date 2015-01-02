@@ -10,11 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 import java.util.Map.Entry;
 import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.Article;
 import javax.swing.table.DefaultTableModel;
+import stockgestion.Controlleur.CaisseControlleur;
+import stockgestion.Controlleur.ClientControlleur;
+import stockgestion.Entite.Client;
+import stockgestion.Outil.Verificateur;
 
 /**
  *
@@ -23,8 +26,8 @@ import javax.swing.table.DefaultTableModel;
 public class Caisse extends javax.swing.JFrame {
     
 private static Caisse instance = null;
-private HashMap<Article, Integer> listArticles;
-private HashMap<Article, Integer> listTotalArticles;
+private static stockgestion.Entite.Caisse caisse;
+private Client client;
 private boolean tiroirOuvert;
 private boolean retourBool;
 private boolean totalBool;
@@ -35,17 +38,17 @@ private Article article;
         addActionListeners();
         setTitle("Caisse");
 
+        client = new Client();
         totalBool = false;
         retourBool = false;
         tiroirOuvert = false;
         tiroirButton.setText("Fermé");
-        listArticles = new HashMap<Article, Integer>();
-        listTotalArticles = new HashMap<Article, Integer>();
     }
     
-    public static Caisse getInstance(){
+    public static Caisse getInstance(stockgestion.Entite.Caisse pcaisse){
         if(instance == null){
             instance = new Caisse();
+            caisse = pcaisse;
         }
         return instance;
     }
@@ -58,9 +61,11 @@ private Article article;
             public void actionPerformed(ActionEvent e) {
                 Caisse.this.setVisible(false);
                 SessionCaisse.getInstance().setVisible(true);
-                
+                totalBool = false;
+                retourBool = false;
+                CaisseControlleur.getInstance().fermer(caisse);
                 clearUI();
-                resetListArticles();
+                ClientControlleur.getInstance().resetArticles(client);
             }
         });
         
@@ -80,7 +85,7 @@ private Article article;
             @Override
             public void actionPerformed(ActionEvent e) {
                 article = null;
-                if(!(codeBarre.getText().isEmpty()) && stockgestion.Outil.Verificateur.isValidInt(codeBarre.getText())){
+                if(!(codeBarre.getText().isEmpty()) && Verificateur.isValidInt(codeBarre.getText())){
                     
                     for(Article a : ArticleControlleur.getInstance().getAllArticles()){
                         if(a.getCodeBarre()== Integer.parseInt(codeBarre.getText())){
@@ -112,10 +117,11 @@ private Article article;
                     totalBool = true;
                     totalButton.setForeground(Color.red);
                     ouvrirTiroir();
-                    end();
+                    total.setText(String.valueOf(CaisseControlleur.getInstance().calculerSomme(caisse)));
+                    tableTotalCaisse();
                 }
-    }
-});
+            }
+        });
         
         tiroirButton.addActionListener(new ActionListener() {
 
@@ -128,8 +134,9 @@ private Article article;
                     if(retourBool){
                         codeBarre.setText(null);
                         codeBarreEtat.setText(null);
-                    
-                        returnArticle(article);
+                        Client client2 = new Client();
+                        ClientControlleur.getInstance().retournerArticle(client2, article);
+                        CaisseControlleur.getInstance().ajouterClient(caisse, client2);
                         retourBool = false;
                         retourArticle.setForeground(Color.black);
                         
@@ -137,11 +144,14 @@ private Article article;
                         totalBool = false;
                         totalButton.setForeground(Color.black);
                         clearUI();
+                        caisse = new stockgestion.Entite.Caisse();
+                        client = new Client();
                     }else{
                         clearUI();
-                        updateArticles();
-                        updateListTotalArticles();
-                        resetListArticles();
+                        ClientControlleur.getInstance().terminerVente(client);
+                        
+                        CaisseControlleur.getInstance().ajouterClient(caisse, client);
+                        client = new Client();
                     }
                 }
             }
@@ -168,9 +178,9 @@ private Article article;
             if(retourBool){
                 ouvrirTiroir();
             }else{
-                updateListArticles(article);
+                ClientControlleur.getInstance().ajouterArticle(client, article.getId());
                 updateTable();
-                updateTotal();
+                total.setText(String.valueOf(ClientControlleur.getInstance().calculerSomme(client)));
             }
         } 
     }
@@ -187,17 +197,6 @@ private Article article;
         tiroirButton.setText("Fermé");
     }
     
-    private void updateListArticles(Article article){
-        for(Entry <Article, Integer> entry : listArticles.entrySet()){
-            if(entry.getKey().getId() == article.getId()){
-                entry.setValue(entry.getValue() + 1);
-                return;
-            }
-        }
-        
-        listArticles.put(article, 1);
-    }
-    
     private void clearUI(){
         codeBarre.setText(null);
         codeBarreEtat.setText(null);
@@ -205,20 +204,26 @@ private Article article;
         resetTable();
     }
     
-    private void resetListArticles(){
-        listArticles.clear();
-    }
-    
-    private void resetListTotalArticles(){
-        listTotalArticles.clear();
-    }
-    
     private void updateTable(){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-        for(Entry <Article, Integer> entry : listArticles.entrySet()){
-            model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
+        for(Entry <Article, Integer> entry : client.getListArticles().entrySet()){
+            if(entry.getValue() > 0){
+                model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
+            }
         }
+        table.setModel(model);
+    }
+    
+    private void tableTotalCaisse(){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for(Client c : caisse.getListClients()){
+            for(Entry <Article, Integer> entry : c.getListArticles().entrySet()){
+                model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
+            }
+        }
+        
         table.setModel(model);
     }
     
@@ -226,56 +231,6 @@ private Article article;
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         table.setModel(model);
-    }
-    
-    private void updateArticles(){
-        for(Entry <Article, Integer> entry : listArticles.entrySet()){
-            entry.getKey().setQuantite(entry.getKey().getQuantite() - entry.getValue());
-            ArticleControlleur.getInstance().editer(entry.getKey());
-        }
-    }
-    
-    private void returnArticle(Article article){
-        int quantite = article.getQuantite()+1;
-        article.setQuantite(quantite);
-        ArticleControlleur.getInstance().editer(article);
-        
-        // et on ajoute la modif dans la listTotalArticles
-        listTotalArticles.put(article, -1);
-    }
-    
-    private void updateTotal(){
-        double somme = 0;
-        for(Entry <Article, Integer> entry : listArticles.entrySet()){
-            somme += entry.getKey().getPrix() * entry.getValue();
-        }
-        total.setText(String.valueOf(somme));
-    }
-    
-    private void updateListTotalArticles(){
-        for(Entry <Article, Integer> entry : listArticles.entrySet()){
-            listTotalArticles.put(entry.getKey(), entry.getValue());
-        }
-    }
-    
-    private void end(){
-        //affichage de l'ensemble de transactions effectuées
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setRowCount(0);
-        for(Entry <Article, Integer> entry : listTotalArticles.entrySet()){
-            model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
-        }
-        table.setModel(model);
-        
-        //affichage du total
-        double somme = 0;
-        for(Entry <Article, Integer> entry : listTotalArticles.entrySet()){
-            somme += entry.getKey().getPrix() * entry.getValue();
-        }
-        total.setText(String.valueOf(somme));
-        
-        resetListArticles();
-        resetListTotalArticles();
     }
     
     /**

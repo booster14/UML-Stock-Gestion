@@ -50,8 +50,7 @@ public class SessionCaisse extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 
                 CaisseControlleur.getInstance().ouvrir(caisse);
-                
-                Caisse.getInstance().setVisible(true);
+                Caisse.getInstance(caisse).setVisible(true);
                 SessionCaisse.this.setVisible(false);
             }
         });

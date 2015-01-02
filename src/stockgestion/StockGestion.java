@@ -28,7 +28,6 @@ public class StockGestion {
         fournisseurControlleur = FournisseurControlleur.getInstance();
         
         ajouterArticle = AjouterArticle.getInstance();
-        caisse = Caisse.getInstance();
         commanderProduit = CommanderProduit.getInstance();
         inventaire = Inventaire.getInstance();
         viewArticle = ViewArticle.getInstance();
