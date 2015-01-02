@@ -23,30 +23,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="back" min="-2" pref="185" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="retourArticle" min="-2" pref="101" max="-2" attributes="0"/>
-                      <EmptySpace pref="68" max="32767" attributes="0"/>
-                      <Component id="codeBarreLabel" min="-2" pref="117" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="codeBarre" min="-2" pref="222" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="enter" min="-2" pref="146" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="codeBarreEtat" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="tiroirButton" max="32767" attributes="0"/>
+                      <Component id="tiroirButton" pref="77" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="totalButton" min="-2" pref="693" max="-2" attributes="0"/>
                   </Group>
@@ -62,6 +43,28 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="total" min="-2" pref="133" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="back" min="-2" pref="185" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <Component id="retourArticle" min="-2" pref="101" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="codeBarreLabel" min="-2" pref="117" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="codeBarre" min="-2" pref="269" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="enter" min="-2" pref="146" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="codeBarreEtat" min="-2" pref="265" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -71,12 +74,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="back" min="-2" pref="44" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="codeBarre" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="codeBarreLabel" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="retourArticle" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="enter" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="codeBarre" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="codeBarreEtat" min="-2" max="-2" attributes="0"/>
@@ -93,7 +96,7 @@
                   <Component id="tiroirButton" max="32767" attributes="0"/>
                   <Component id="totalButton" pref="35" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -103,8 +106,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Retourner &#xe0; l&apos;&#xe9;cran d&apos;accueil"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="codeBarre">
     </Component>
     <Component class="javax.swing.JLabel" name="codeBarreLabel">
       <Properties>
@@ -193,6 +194,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Tiroir"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="codeBarre">
     </Component>
   </SubComponents>
 </Form>
