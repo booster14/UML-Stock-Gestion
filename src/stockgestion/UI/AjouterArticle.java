@@ -94,6 +94,7 @@ public class AjouterArticle extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 AjouterArticle.this.setVisible(false);
                 NouveauFournisseur.getInstance().setVisible(true);
+                NouveauFournisseur.getInstance().setPreviousWindow(AjouterArticle.this);
             }
         });
     }

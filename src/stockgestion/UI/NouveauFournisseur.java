@@ -7,6 +7,7 @@ package stockgestion.UI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import stockgestion.Controlleur.FournisseurControlleur;
 import stockgestion.Entite.Fournisseur;
 
@@ -15,7 +16,8 @@ import stockgestion.Entite.Fournisseur;
  * @author rubeus
  */
 public class NouveauFournisseur extends javax.swing.JFrame {
-private static NouveauFournisseur instance = null;
+    private static NouveauFournisseur instance = null;
+    private JFrame previousFrame;
 
     private NouveauFournisseur() {
         initComponents();
@@ -36,7 +38,7 @@ private static NouveauFournisseur instance = null;
             @Override
             public void actionPerformed(ActionEvent e) {
                 NouveauFournisseur.this.setVisible(false);
-                AjouterArticle.getInstance().setVisible(true);
+                previousFrame.setVisible(true);
             }
         });
         
@@ -59,9 +61,13 @@ private static NouveauFournisseur instance = null;
                 //Rafraichir la liste des fournisseurs puis retourner a la fenetre Ajout article
                 stockgestion.StockGestion.getInstance().refreshUI();
                 NouveauFournisseur.this.setVisible(false);
-                AjouterArticle.getInstance().setVisible(true);
+                previousFrame.setVisible(true);
             }
         });
+    }
+    
+    public void setPreviousWindow(JFrame frame){
+        this.previousFrame = frame;
     }
     
     private void resetUI(){

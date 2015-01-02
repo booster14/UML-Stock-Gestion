@@ -103,6 +103,16 @@ public class ViewArticle extends javax.swing.JFrame {
                 ViewFournisseur.getInstance().setVisible(true);
             }
         });
+        
+        ajouterFournisseur.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewArticle.this.setVisible(false);
+                NouveauFournisseur.getInstance().setVisible(true);
+                NouveauFournisseur.getInstance().setPreviousWindow(ViewArticle.this);
+            }
+        });
     }
     
     public void viewArticleMode(Article article){
