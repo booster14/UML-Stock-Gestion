@@ -1,3 +1,5 @@
+\part{Conception}
+
 \chapter{Conception générale}
 
 \section{Répartition en paquetage}
@@ -50,7 +52,7 @@ A la racine de notre projet, nous retrouvons le paquetage \textbf{stockgestion} 
 \includegraphics[width=14cm]{./Conception/stockgestion}
 \end{center}
 
-Dans le paquetage \textbf{stockgestion}, nous retrouvons 5 sous-paquetages, chacun contient des classes qui jouent un certain rôle précis dans l'application.\\
+Dans le paquetage \textbf{stockgestion}, nous retrouvons 5 sous-paquetages. Chacun contient des classes qui jouent un certain rôle précis dans l'application.\\
 
 Premièrement, nous avons le paquetage \textbf{Entite}. Dans ce paquetage, chaque classe représente une entité utilisé dans l'application: un article, un fournisseur, une commande, un client ou encore une caisse.
 
@@ -71,7 +73,7 @@ Nous avons le paquetage \textbf{Controleur} qui contient des classes de contrôl
 \includegraphics[width=14cm]{./Conception/controlleur}
 \end{center}
 
-Pour les besoins très spécifiques de notre application, nous avons créé le paquetage \textbf{Outil}. Dedans on trouve la classe \textbf{Verificateur} qui s'occupe de toutes les vérifications des entrées utilisateurs de notre application, ainsi permet d'éviter des erreurs avec la base de données (un numéro mal écrit, un texte avec des caractères spéciaux...).
+Pour les besoins très spécifiques de notre application, nous avons créé le paquetage \textbf{Outil}. On y trouve la classe \textbf{Verificateur} qui s'occupe de toutes les vérifications des entrées utilisateurs de notre application, ainsi permet d'éviter des erreurs avec la base de données (un numéro mal écrit, un texte avec des caractères spéciaux...).
 
 \begin{center}
 \includegraphics[width=14cm]{./Conception/outil}
