@@ -13,12 +13,22 @@ public class Verificateur {
     
     //String non vide puis je sais pas....
     public static boolean isValidInt(String texte){
-        return false;
+        try{
+            Integer.parseInt(texte);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
     }
     
     //String non vide etc
     public static boolean isValidDouble(String texte){
-        return false;
+        try{
+            Double.parseDouble(texte);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
     }
     
     //Mettre le champs non valide en rouge
