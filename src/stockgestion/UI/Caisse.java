@@ -10,9 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.Article;
@@ -63,6 +61,17 @@ private Article article;
             }
         });
         
+        randomizer.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                article = ArticleControlleur.getInstance().getRandomArticle();
+                codeBarre.setText(String.valueOf(article.getCodeBarre()));
+                
+                passageArticle();
+            }
+        });
+        
         enter.addActionListener(new ActionListener() {
 
             @Override
@@ -78,22 +87,8 @@ private Article article;
                     }
                 }
                 
+                passageArticle();
                 
-                if(article == null){
-                    codeBarreEtat.setForeground(Color.red);
-                    codeBarreEtat.setText("Code barre non reconnu");
-                    
-                }else{
-                    codeBarreEtat.setForeground(Color.BLACK);
-                    codeBarreEtat.setText(article.getNom() + "\t\t" + article.getPrix());
-                    if(retourBool){
-                        ouvrirTiroir();
-                    }else{
-                        updateListArticles(article);
-                        updateTable();
-                        updateTotal();
-                    }
-                } 
             }
         });
         
@@ -157,13 +152,33 @@ private Article article;
         });
     }
     
+    private void passageArticle(){
+        if(article == null){
+            codeBarreEtat.setForeground(Color.red);
+            codeBarreEtat.setText("Code barre non reconnu");
+
+        }else{
+            codeBarreEtat.setForeground(Color.BLACK);
+            codeBarreEtat.setText(article.getNom() + "\t\t" + article.getPrix());
+            if(retourBool){
+                ouvrirTiroir();
+            }else{
+                updateListArticles(article);
+                updateTable();
+                updateTotal();
+            }
+        } 
+    }
+    
     private void ouvrirTiroir(){
         tiroirOuvert = true;
+        tiroirButton.setForeground(Color.red);
         tiroirButton.setText("Ouvert");
     }
     
     private void fermerTiroir(){
         tiroirOuvert = false;
+        tiroirButton.setForeground(Color.black);
         tiroirButton.setText("Fermé");
     }
     
@@ -266,6 +281,7 @@ private Article article;
         tiroirButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         codeBarre = new javax.swing.JTextField();
+        randomizer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -319,6 +335,8 @@ private Article article;
 
         jLabel2.setText("Tiroir");
 
+        randomizer.setText("Passer un article");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -345,13 +363,15 @@ private Article article;
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
                                 .addComponent(retourArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(codeBarreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codeBarre, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codeBarre, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(randomizer, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)))
                         .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -364,13 +384,16 @@ private Article article;
             .addGroup(layout.createSequentialGroup()
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codeBarreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(retourArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codeBarre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(codeBarreEtat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(codeBarreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(retourArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(enter, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(codeBarre, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(codeBarreEtat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(randomizer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -432,6 +455,7 @@ private Article article;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton randomizer;
     private javax.swing.JButton retourArticle;
     private javax.swing.JTable table;
     private javax.swing.JButton tiroirButton;

@@ -15,12 +15,22 @@ public class Verificateur {
     
     //String non vide puis je sais pas....
     public static boolean isValidInt(String texte){
-        return !texte.equals("");
+        try{
+            Integer.parseInt(texte);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
     }
     
     //String non vide etc
     public static boolean isValidDouble(String texte){
-        return !texte.equals("");
+        try{
+            Double.parseDouble(texte);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
     }
     
     public static boolean isValidSelection(JList list){

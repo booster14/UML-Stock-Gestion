@@ -1,6 +1,7 @@
 package stockgestion.Controlleur;
 
 import java.util.List;
+import java.util.Random;
 import stockgestion.Entite.*;
 import stockgestion.Manager.ArticleManagerBDD;
 
@@ -65,6 +66,18 @@ public class ArticleControlleur {
 
     public List<Article> getArticlesACommander() {
         return bdd.getACommander();
+    }
+    
+    public Article getRandomArticle(){
+        List<Article> list = getAllArticles();
+        Random rand = new Random();
+        int randomNum = rand.nextInt((list.size() - 0));
+        
+        Article a = list.get(randomNum);
+        if(a.getQuantite() > 0)
+            return a;
+        else 
+            return getRandomArticle();
     }
 
 }
