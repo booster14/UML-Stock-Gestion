@@ -4,19 +4,40 @@
 
 Dans notre projet, nous avons un paquetage par défaut \textit{stockgestion}. Dans ce paquetage, nous retrouvons 5 sous-paquetages \textit{Entite}, \textit{Manager}, \textit{Controlleur}, \textit{Outil} et \textit{UI}.\\
 
-Voici notre diagramme de classe dans sa version finale, avec les relations entre les paquetages.
+Chaque package a des fonctionnalitées bien délimité. 
+\begin{itemize}
+	\item UI regroupe toutes les classes de l'interface utilisateur.
+	\item Manager s'occupe de toutes les intéractions avec la base de donnée.
+	\item Controlleur gèrent les interactions entre toutes les classes et les actions de l'utilisateur.
+	\item Outil contient toutes les classes Outils
+	\item Entite contient toutes les représentations objets de notre application.
+\end{itemize}
+
+Ci-dessous, le diagramme de Package qui représente les interactions entre nos packages :
+\begin{center}
+	\includegraphics[width=14cm]{Conception/DiagrammeDeClassePackage.png}
+\end{center}
 
 \begin{center}
 \includegraphics[width=14cm]{./Conception/DiagrammeDeClassePackage}
 \end{center}
 
+\section{Choix des technologies}
+Le projet consiste à implémenter une solution de suivi de stock et de gestion d'une caisse. Elle ne requiert aucun traitement lourd, nous n'avons donc pas implémenter de traitement multithread. 
 
-\section{Les choix technologiques}
+Notre projet est bâti autour d'un MVC comprenant un package de controlleurs, un package de vue et un package de manager. Les managers traitent avec une base de donnée SQL nommé Derby. Nous avons fait ce choix car ils nous semblait important de stocker les données dans une base de donnée type SQL. De plus, nous avions déjà travailler avec Derby dans des projets précédents.
+
+L'interface utilisateur est animé par swing. Ce fût un choix pratique avant tous, notamment car Neteans propose un générateur de template puissant nommé Matisse.
+
+Notre solution compte également de nombreux Singleton. En effet, les controlleurs et les managers sont des singletons. La raison de cette implémentation a déjà été expliqué dans la aprtie précédente.
 
 \section{Diagramme de composant du logiciel}
 
+Quentin ?
+
 \section{Diagramme de déploiement}
 
+Ngocky ?
 
 
 \chapter{Conception détaillée}
@@ -66,6 +87,3 @@ Enfin, nous avons le paquetage \textbf{UI} qui contient toutes les classes de no
 \section{Diagrammes de séquences techniques}
 
 \section{Architecture du projet: approche MVC}
-
-
-\chapter{Phase d'implémentation}
