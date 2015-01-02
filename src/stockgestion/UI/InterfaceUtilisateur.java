@@ -91,6 +91,7 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 AjouterArticle.getInstance().setVisible(true);
                 InterfaceUtilisateur.this.setVisible(false);
+                AjouterArticle.getInstance().setPreviousWindow(InterfaceUtilisateur.this);
             }
         });
         

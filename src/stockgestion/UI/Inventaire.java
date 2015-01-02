@@ -51,6 +51,7 @@ public class Inventaire extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 Inventaire.this.setVisible(false);
                 AjouterArticle.getInstance().setVisible(true);
+                AjouterArticle.getInstance().setPreviousWindow(Inventaire.this);
             }
         });
         

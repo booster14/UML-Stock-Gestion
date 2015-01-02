@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,6 +26,7 @@ public class AjouterArticle extends javax.swing.JFrame {
     private static AjouterArticle instance = null;
     private ArrayList<Fournisseur> selectedFournisseur;
     private List<Fournisseur> listFournisseur;
+    private JFrame previousFrame;
     
     private AjouterArticle() {
         initComponents();
@@ -46,7 +48,7 @@ public class AjouterArticle extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AjouterArticle.this.setVisible(false);
-                InterfaceUtilisateur.getInstance().setVisible(true);
+                previousFrame.setVisible(true);
             }
         });
         
@@ -70,7 +72,9 @@ public class AjouterArticle extends javax.swing.JFrame {
                 resetUI();
                 
                 //Fermer cette fenetre
-                InterfaceUtilisateur.getInstance().retournerEcranAccueil(AjouterArticle.this);
+                AjouterArticle.this.setVisible(false);
+                previousFrame.setVisible(true);
+                stockgestion.StockGestion.getInstance().refreshUI();
             }
         });
         
@@ -106,6 +110,10 @@ public class AjouterArticle extends javax.swing.JFrame {
             model.addElement(f.getNom());
         }
         fournisseur.setModel(model);
+    }
+    
+    public void setPreviousWindow(JFrame frame){
+        this.previousFrame = frame;
     }
     
     private void resetUI(){
@@ -172,7 +180,7 @@ public class AjouterArticle extends javax.swing.JFrame {
 
         fournisseurLabel.setText("Fournisseur");
 
-        back.setText("Retouner à l'écran d'accueil");
+        back.setText("Retour");
 
         ajouter.setText("Ajouter");
 
@@ -186,10 +194,6 @@ public class AjouterArticle extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -221,13 +225,17 @@ public class AjouterArticle extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(explainFournisseur)
                 .addGap(235, 235, 235))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(typeVenteLabel)
