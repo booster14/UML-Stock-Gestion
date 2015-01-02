@@ -118,6 +118,7 @@ private Article article;
                     totalButton.setForeground(Color.red);
                     ouvrirTiroir();
                     total.setText(String.valueOf(CaisseControlleur.getInstance().calculerSomme(caisse)));
+                    tableTotalCaisse();
                 }
             }
         });
@@ -133,8 +134,9 @@ private Article article;
                     if(retourBool){
                         codeBarre.setText(null);
                         codeBarreEtat.setText(null);
-                    
-                        ClientControlleur.getInstance().retournerArticle(client, article);
+                        Client client2 = new Client();
+                        ClientControlleur.getInstance().retournerArticle(client2, article);
+                        CaisseControlleur.getInstance().ajouterClient(caisse, client2);
                         retourBool = false;
                         retourArticle.setForeground(Color.black);
                         
@@ -210,6 +212,18 @@ private Article article;
                 model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
             }
         }
+        table.setModel(model);
+    }
+    
+    private void tableTotalCaisse(){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for(Client c : caisse.getListClients()){
+            for(Entry <Article, Integer> entry : c.getListArticles().entrySet()){
+                model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
+            }
+        }
+        
         table.setModel(model);
     }
     
