@@ -117,7 +117,7 @@ public class InterfaceUtilisateur extends javax.swing.JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Caisse.getInstance().setVisible(true);
+                SessionCaisse.getInstance().setVisible(true);
                 InterfaceUtilisateur.this.setVisible(false);
             }
         });

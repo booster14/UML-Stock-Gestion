@@ -57,7 +57,10 @@ private Article article;
             @Override
             public void actionPerformed(ActionEvent e) {
                 Caisse.this.setVisible(false);
-                InterfaceUtilisateur.getInstance().setVisible(true);
+                SessionCaisse.getInstance().setVisible(true);
+                
+                clearUI();
+                resetListArticles();
             }
         });
         
@@ -77,7 +80,7 @@ private Article article;
             @Override
             public void actionPerformed(ActionEvent e) {
                 article = null;
-                if(!(codeBarre.getText().isEmpty())){
+                if(!(codeBarre.getText().isEmpty()) && stockgestion.Outil.Verificateur.isValidInt(codeBarre.getText())){
                     
                     for(Article a : ArticleControlleur.getInstance().getAllArticles()){
                         if(a.getCodeBarre()== Integer.parseInt(codeBarre.getText())){
@@ -107,8 +110,9 @@ private Article article;
             public void mouseClicked(MouseEvent e){
                 if(e.getClickCount()==2){
                     totalBool = true;
+                    totalButton.setForeground(Color.red);
                     ouvrirTiroir();
-                    System.out.println("coucou");
+                    end();
                 }
     }
 });
@@ -120,20 +124,21 @@ private Article article;
                 if(tiroirOuvert) // fermeture du tiroir
                 {
                     fermerTiroir();
-                    codeBarre.setText(null);
-                    codeBarreEtat.setText(null);
+                    
                     if(retourBool){
+                        codeBarre.setText(null);
+                        codeBarreEtat.setText(null);
+                    
                         returnArticle(article);
                         retourBool = false;
                         retourArticle.setForeground(Color.black);
                         
                     }else if(totalBool){
-                        System.out.println("batard");
                         totalBool = false;
-                        end();
+                        totalButton.setForeground(Color.black);
+                        clearUI();
                     }else{
-                        total.setText(null);
-                        resetTable();
+                        clearUI();
                         updateArticles();
                         updateListTotalArticles();
                         resetListArticles();
@@ -193,8 +198,19 @@ private Article article;
         listArticles.put(article, 1);
     }
     
+    private void clearUI(){
+        codeBarre.setText(null);
+        codeBarreEtat.setText(null);
+        total.setText(null);
+        resetTable();
+    }
+    
     private void resetListArticles(){
         listArticles.clear();
+    }
+    
+    private void resetListTotalArticles(){
+        listTotalArticles.clear();
     }
     
     private void updateTable(){
@@ -257,6 +273,9 @@ private Article article;
             somme += entry.getKey().getPrix() * entry.getValue();
         }
         total.setText(String.valueOf(somme));
+        
+        resetListArticles();
+        resetListTotalArticles();
     }
     
     /**
@@ -285,7 +304,7 @@ private Article article;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        back.setText("Retourner à l'écran d'accueil");
+        back.setText("Fermer la caisse");
 
         codeBarreLabel.setText("Référence Article");
 
