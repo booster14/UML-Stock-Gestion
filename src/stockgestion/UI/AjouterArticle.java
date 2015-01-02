@@ -17,6 +17,7 @@ import javax.swing.event.ListSelectionListener;
 import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.Article;
 import stockgestion.Entite.Fournisseur;
+import stockgestion.Outil.Verificateur;
 
 /**
  *
