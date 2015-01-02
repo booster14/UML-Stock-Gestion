@@ -1,5 +1,6 @@
 package stockgestion.Controlleur;
 
+import java.util.Map;
 import stockgestion.Entite.*;
 import stockgestion.Manager.ArticleManagerBDD;
 
@@ -38,5 +39,23 @@ public class CaisseControlleur {
      */
     public void ajouterClient(Caisse caisse, Client client) {
         caisse.getListClients().add(client);
+    }
+    
+    /**
+     * 
+     * @param caisse la caisse dont on veut calculer le total
+     */
+    public double calculerSomme(Caisse caisse) {
+        double somme = 0;
+        for(Client client : caisse.getListClients())
+        {
+            for(Map.Entry <Article, Integer> entry : client.getListArticles().entrySet()){
+                somme += entry.getKey().getPrix() * entry.getValue();
+                System.out.print(entry.getKey() + "   ");
+                System.out.println(entry.getValue());
+            }
+        }
+        System.out.println(somme);
+        return somme;
     }
 }

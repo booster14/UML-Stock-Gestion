@@ -1,22 +1,21 @@
 package stockgestion.Entite;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Client {
 
-    private List<Article> listArticles;
+    private HashMap<Article, Integer> listArticles;
     private double somme;
     
     public Client(){
-        this.listArticles = new ArrayList<Article>();
+        this.listArticles = new HashMap<Article, Integer>();
     }
 
-    public List<Article> getListArticles() {
+    public HashMap<Article, Integer> getListArticles() {
         return listArticles;
     }
 
-    public void setListArticles(List<Article> listArticles) {
+    public void setListArticles(HashMap<Article, Integer> listArticles) {
         this.listArticles = listArticles;
     }
 
