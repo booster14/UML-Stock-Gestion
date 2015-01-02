@@ -1,5 +1,28 @@
 # UML
 
+## Vidéo de présentation
+
+### Produits à commander
+* Commander un produit (clic droit sur l'article, n'oublie pas de sélectionner l'article avant)
+* Imprimer la page (menu en haut)
+* Déclaré qu'un produit en commande est arrivé (et montrer que le stock a bien été mis à jour)
+
+### Inventaire
+* Supprimer un/des articles (avec ou pas la multi-sélection)
+* Consulter puis Editer un article (ne sélectionnes pas plusieurs, c'est toujours le premier article qui est édité)
+* Dans Voir article, éditer un fournisseur existant (sélectionne un fournisseur puis clic droit)
+* Ajouter un fournisseur
+* Choisir plusieurs fournisseurs pour l'article avec la multi-sélection
+* Imprimer la page (toujours menu en haut)
+
+### Ajouter un article
+* Ajouter un article
+* Montrer dans l'Inventaire que l'article a bien été ajouté
+
+### Caisse
+* Tu connais mieux que moi Quentin :smiley:
+
+
 ## Base de donnée
 
 ### Database
