@@ -102,7 +102,7 @@ public class CommanderProduit extends javax.swing.JFrame {
                 int index = table.getSelectedRow();     
                 if(index != -1){
                     if(CommandeControlleur.getInstance().articleEnCommande(listArticles.get(index))){
-                    produitArrive.setVisible(true);
+                        produitArrive.setVisible(true);
                     } else{
                         produitArrive.setVisible(false);
                     }
@@ -119,6 +119,30 @@ public class CommanderProduit extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 CommandeControlleur.getInstance().updateStockArticleCommande(listArticles.get(table.getSelectedRow()));
                 stockgestion.StockGestion.getInstance().refreshUI();
+            }
+        });
+        
+        /**
+         *  Menu de la fenetre
+         */
+        menuItemImprimer.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Imprimer i = Imprimer.getInstance();
+                i.newPage("Commandes");
+                
+                CommandeControlleur controlleur = CommandeControlleur.getInstance();
+                for(Article article: listArticles){
+                    if(controlleur.articleEnCommande(article)){
+                        i.println("Nom de l'article: "+article.getNom());
+                        Commande commande = controlleur.getCommandeArticle(article);
+                        i.println("Date de la commande: "+commande.getDate());
+                        i.println("Quantité: "+commande.getQuantite());
+                        i.println("Montant de la commande: "+commande.getMontant()+"€");
+                        i.println("");
+                    } 
+                }
             }
         });
     }
