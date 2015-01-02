@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -85,6 +87,20 @@ public class ViewArticle extends javax.swing.JFrame {
                     selectedFournisseur.add(listFournisseurs.get(indexes[i]));
                 }
 
+            }
+        });
+        
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem viewItem = new JMenuItem("Consulter le fournisseur");
+        popupMenu.add(viewItem);
+        fournisseur.setComponentPopupMenu(popupMenu);
+        viewItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ViewArticle.this.setVisible(false);
+                ViewFournisseur.getInstance().viewFournisseurMode(listFournisseurs.get(fournisseur.getSelectedIndex()));
+                ViewFournisseur.getInstance().setVisible(true);
             }
         });
     }
