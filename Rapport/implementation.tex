@@ -3,7 +3,53 @@
 \chapter{Implémentation}
 
 \section{Copies d'écran de l'implémentation}
+Ci-dessous quelque impression de l'implémentation :
+
+\begin{center}
+	\includegraphics[width=14cm]{./Implementation/home}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=14cm]{./Implementation/acommander}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=14cm]{./Implementation/ajouteraticle}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=14cm]{./Implementation/caisse}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=14cm]{./Implementation/inventaire}
+\end{center}
+
+\begin{center}
+	\includegraphics[width=14cm]{./Implementation/article}
+\end{center}
 
 \section{Livrable du logiciel}
 
+\subsection{Installation}
+\begin{enumerate}
+	\item Ouvrez le projet avec Netbeans.
+	\item Dans l'onglet \textit{Service}, créez une nouvelle base de donnée nommé \textbf{uml} avec en login : \textbf{uml} et en password : \textbf{groupe3}. 
+	\item Connectez vous à cette nouvelle base de donnée.
+	\item Faites un click droit sur la base de donnée et sélectionner \textit{exécuter}.
+	\item Copiez-collez le script scriptBDD.sql et exécuter
+	\item Copiez-collez le script ajoutBDD.sql et exécuter
+	\item Vous pouvez maintenant exécuter notre application
+\end{enumerate}
+
+\subsection{Mode d'emploi}
+Une fois le programme lancez, suivi simplement les indications sur l'écran et naviguez à l'aide des boutons.
+
 \section{Bilan de l'état du projet}
+Notre solution remplie auourd'hui toutes les exigences du cahier des charges. Cependant il est envisageable d'imaginer d'autres possibilités. 
+
+Il serait ainsi interessant de garder en mémoire les articles passés en manuel à la caisse pour, dans le cas échéants, corriger le code barre.
+
+Le cahier des charges ne le précise pas, mais la possibilité de passer commande de plusieurs articles dans une même commande pourrait être ajoutée. 
+
+Une grosse évolution serait la mise en place d'une API côté serveur. Ainsi des clients, type mobiles, pourraient vérifier l'état des stocks n'importe où et n'importe quand. 
