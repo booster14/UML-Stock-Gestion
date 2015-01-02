@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import stockgestion.Controlleur.FournisseurControlleur;
 import stockgestion.Entite.Fournisseur;
+import stockgestion.Outil.Verificateur;
 
 /**
  *
@@ -49,15 +50,17 @@ public class ViewFournisseur extends javax.swing.JFrame {
                 if(isViewMode){
                     editFournisseurMode();
                 } else{
-                    //Ajouter un article dans la BDD
-                    fournisseur.setNom(nom.getText());
-                    fournisseur.setAdresse(adresse.getText());
-                    fournisseur.setCodePostal(Integer.parseInt(codePostal.getText()));
-                    fournisseur.setNumeroTelephone(Integer.parseInt(numTel.getText()));
+                    //Editer le fournisseur dans la BDD
+                    if(Verificateur.isValideFournisseur(nom, adresse, codePostal, numTel)){
+                        fournisseur.setNom(nom.getText());
+                        fournisseur.setAdresse(adresse.getText());
+                        fournisseur.setCodePostal(Integer.parseInt(codePostal.getText()));
+                        fournisseur.setNumeroTelephone(Integer.parseInt(numTel.getText()));
 
-                    FournisseurControlleur.getInstance().editer(fournisseur);
-                    
-                    viewFournisseurMode(fournisseur);
+                        FournisseurControlleur.getInstance().editer(fournisseur);
+
+                        viewFournisseurMode(fournisseur);
+                    }                    
                 }
             }
         });

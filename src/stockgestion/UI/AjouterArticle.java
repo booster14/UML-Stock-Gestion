@@ -58,24 +58,26 @@ public class AjouterArticle extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Ajouter un article dans la BDD
-                Article article = new Article();
-                article.setNom(nom.getText());
-                article.setCodeBarre(Integer.parseInt((codeBarre.getText())));
-                article.setPrix(Double.parseDouble(prixUnitaire.getText()));
-                article.setQuantite(Integer.parseInt(quantite.getText()));
-                article.setSeuilDeReassortiment(Integer.parseInt(seuilCommander.getText()));
-                article.setTypeDeVente(poids.isSelected());
-                article.setListFournisseur(selectedFournisseur);
-                
-                ArticleControlleur.getInstance().ajouter(article);
-                
-                //Remettre a zero les champs
-                resetUI();
-                
-                //Fermer cette fenetre
-                AjouterArticle.this.setVisible(false);
-                previousFrame.setVisible(true);
-                stockgestion.StockGestion.getInstance().refreshUI();
+                if(Verificateur.isValideArticle(nom, codeBarre, prixUnitaire, quantite, seuilCommander, fournisseur)){
+                    Article article = new Article();
+                    article.setNom(nom.getText());
+                    article.setCodeBarre(Integer.parseInt((codeBarre.getText())));
+                    article.setPrix(Double.parseDouble(prixUnitaire.getText()));
+                    article.setQuantite(Integer.parseInt(quantite.getText()));
+                    article.setSeuilDeReassortiment(Integer.parseInt(seuilCommander.getText()));
+                    article.setTypeDeVente(poids.isSelected());
+                    article.setListFournisseur(selectedFournisseur);
+
+                    ArticleControlleur.getInstance().ajouter(article);
+
+                    //Remettre a zero les champs
+                    resetUI();
+
+                    //Fermer cette fenetre
+                    AjouterArticle.this.setVisible(false);
+                    previousFrame.setVisible(true);
+                    stockgestion.StockGestion.getInstance().refreshUI();
+                }                
             }
         });
         

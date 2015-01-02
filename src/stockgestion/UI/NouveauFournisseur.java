@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import stockgestion.Controlleur.FournisseurControlleur;
 import stockgestion.Entite.Fournisseur;
+import stockgestion.Outil.Verificateur;
 
 /**
  *
@@ -47,21 +48,23 @@ public class NouveauFournisseur extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Ajouter un fournisseur dans la BDD
-                Fournisseur fournisseur = new Fournisseur();
-                fournisseur.setNom(nom.getText());
-                fournisseur.setAdresse(adresse.getText());
-                fournisseur.setCodePostal(Integer.parseInt(codePostal.getText()));
-                fournisseur.setNumeroTelephone(Integer.parseInt(numTel.getText()));
-                
-                FournisseurControlleur.getInstance().ajouter(fournisseur);
-                
-                //Remettre a zero les champs
-                resetUI();
-                
-                //Rafraichir la liste des fournisseurs puis retourner a la fenetre Ajout article
-                stockgestion.StockGestion.getInstance().refreshUI();
-                NouveauFournisseur.this.setVisible(false);
-                previousFrame.setVisible(true);
+                if(Verificateur.isValideFournisseur(nom, adresse, codePostal, numTel)){
+                    Fournisseur fournisseur = new Fournisseur();
+                    fournisseur.setNom(nom.getText());
+                    fournisseur.setAdresse(adresse.getText());
+                    fournisseur.setCodePostal(Integer.parseInt(codePostal.getText()));
+                    fournisseur.setNumeroTelephone(Integer.parseInt(numTel.getText()));
+
+                    FournisseurControlleur.getInstance().ajouter(fournisseur);
+
+                    //Remettre a zero les champs
+                    resetUI();
+
+                    //Rafraichir la liste des fournisseurs puis retourner a la fenetre Ajout article
+                    stockgestion.StockGestion.getInstance().refreshUI();
+                    NouveauFournisseur.this.setVisible(false);
+                    previousFrame.setVisible(true);
+                }                
             }
         });
     }

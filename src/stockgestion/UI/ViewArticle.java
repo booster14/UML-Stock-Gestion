@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionListener;
 import stockgestion.Controlleur.ArticleControlleur;
 import stockgestion.Entite.Article;
 import stockgestion.Entite.Fournisseur;
+import stockgestion.Outil.Verificateur;
 
 /**
  *
@@ -61,18 +62,20 @@ public class ViewArticle extends javax.swing.JFrame {
                 if(isViewMode){
                     editArticleMode();
                 } else{
-                    //Ajouter un article dans la BDD
-                    article.setNom(nom.getText());
-                    article.setCodeBarre(Integer.parseInt((codeBarre.getText())));
-                    article.setPrix(Double.parseDouble(prixUnitaire.getText()));
-                    article.setQuantite(Integer.parseInt(quantite.getText()));
-                    article.setSeuilDeReassortiment(Integer.parseInt(seuilCommander.getText()));
-                    article.setTypeDeVente(poids.isSelected());
-                    article.setListFournisseur(selectedFournisseur);
+                    //Editer l'article dans la BDD
+                    if(Verificateur.isValideArticle(nom, codeBarre, prixUnitaire, quantite, seuilCommander, fournisseur)){
+                        article.setNom(nom.getText());
+                        article.setCodeBarre(Integer.parseInt((codeBarre.getText())));
+                        article.setPrix(Double.parseDouble(prixUnitaire.getText()));
+                        article.setQuantite(Integer.parseInt(quantite.getText()));
+                        article.setSeuilDeReassortiment(Integer.parseInt(seuilCommander.getText()));
+                        article.setTypeDeVente(poids.isSelected());
+                        article.setListFournisseur(selectedFournisseur);
 
-                    ArticleControlleur.getInstance().editer(article);
-                    
-                    viewArticleMode(article);
+                        ArticleControlleur.getInstance().editer(article);
+
+                        viewArticleMode(article);
+                    }                    
                 }
             }
         });
