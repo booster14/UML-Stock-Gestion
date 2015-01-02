@@ -12,7 +12,7 @@ public class Verificateur {
         int res1 = texte.indexOf("'");
         int res2 = texte.indexOf('"');
          
-        return res1 == -1 && res2 == -1 && !texte.equals("");
+        return res1 == -1 && res2 == -1 && texte.length() != 0;
     }   
     
     public static boolean isValidInt(String texte){
