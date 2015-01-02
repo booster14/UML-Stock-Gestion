@@ -7,13 +7,13 @@ import javax.swing.JTextField;
 
 public class Verificateur {
     
-    //Il ne faut pas de caracteres speciales qui fait merder les requetes sql, comme le ', ", etc
-    //Et faut que string non vide
-    public static boolean isValidString(String texte){
-        return !texte.equals("");
-    }    
+   public static boolean isValidString(String texte){
+        int res1 = texte.indexOf("'");
+        int res2 = texte.indexOf('"');
+         
+        return res1 == -1 && res2 == -1;
+    }   
     
-    //String non vide puis je sais pas....
     public static boolean isValidInt(String texte){
         try{
             Integer.parseInt(texte);
@@ -23,7 +23,6 @@ public class Verificateur {
         }
     }
     
-    //String non vide etc
     public static boolean isValidDouble(String texte){
         try{
             Double.parseDouble(texte);
