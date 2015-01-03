@@ -9,8 +9,8 @@ Dans notre projet, nous avons un paquetage par défaut \textit{stockgestion}. Da
 Chaque package a des fonctionnalitées bien délimité. 
 \begin{itemize}
 	\item UI regroupe toutes les classes de l'interface utilisateur.
-	\item Manager s'occupe de toutes les intéractions avec la base de donnée.
-	\item Controlleur gèrent les interactions entre toutes les classes et les actions de l'utilisateur.
+	\item Manager s'occupe de toutes les interactions avec la base de données.
+	\item Controlleur gère les interactions entre toutes les classes et les actions de l'utilisateur.
 	\item Outil contient toutes les classes Outils
 	\item Entite contient toutes les représentations objets de notre application.
 \end{itemize}
@@ -21,13 +21,13 @@ Ci-dessous, le diagramme de Package qui représente les interactions entre nos p
 \end{center}
 
 \section{Choix des technologies}
-Le projet consiste à implémenter une solution de suivi de stock et de gestion d'une caisse. Elle ne requiert aucun traitement lourd, nous n'avons donc pas implémenter de traitement multithread. 
+Le projet consiste à implémenter une solution de suivi de stock et de gestion d'une caisse. Elle ne requiert aucun traitement lourd, nous n'avons donc pas implémenter de traitement multi-thread. 
 
-Notre projet est bâti autour d'un MVC comprenant un package de controlleurs, un package de vues et un package de managers. Les managers traitent avec une base de donnée SQL nommé Derby. Nous avons fait ce choix car il nous semblait important de stocker les données dans une base de donnée type SQL. De plus, nous avions déjà travailler avec Derby dans des projets précédents.
+Notre projet est bâti autour d'un MVC comprenant un package de contrôlleurs, un package de vues et un package de managers. Les managers traitent avec une base de données SQL nommé Derby. Nous avons fait ce choix car il nous semblait important de stocker les données dans une base de données type SQL. De plus, nous avions déjà travailler avec Derby dans des projets précédents.
 
-L'interface utilisateur est animé par swing. Ce fût un choix pratique avant tout, notamment car Neteans propose un générateur de template puissant nommé Matisse.
+L'interface utilisateur est animé par Swing. Ce fût un choix pratique avant tout, notamment car Netbeans propose un générateur de template puissant nommé Matisse.
 
-Notre solution compte également de nombreux Singleton. En effet, les controlleurs et les managers sont des singletons. La raison de cette implémentation a déjà été expliquée dans la partie précédente.
+Notre solution compte également de nombreux Singletons. En effet, les contrôlleurs et les managers sont des singletons. La raison de cette implémentation a déjà été expliquée dans la partie précédente.
 
 \section{Diagramme de composant du logiciel}
 
@@ -89,8 +89,8 @@ Enfin, nous avons le paquetage \textbf{UI} qui contient toutes les classes de no
 Quentin ?
 
 \section{Architecture du projet: approche MVC}
-Notre application repose sur une architecture MVC. Les vues, les controllers et les managers sont ainsi séparés et placés dans des packages différents.
+Notre application repose sur une architecture MVC. Les vues, les contrôlleurs et les managers sont ainsi séparés et placés dans des packages différents.
 Comme illustré plusieurs fois, le package UI s'occupe de l'aspect vue du modèle MVC.
-Le package Manager correspondant aux managers et s'occupe de toutes les transactions avec la base de donnée.
+Le package Manager correspondant aux managers et s'occupe de toutes les transactions avec la base de données.
 
-Enfin le package controlleur contient tous les contrôleurs et gèrent toutes les actions de l'utilisateur. 
+Enfin le package Contrôlleur contient tous les contrôlleurs et gèrent toutes les actions de l'utilisateur. 
