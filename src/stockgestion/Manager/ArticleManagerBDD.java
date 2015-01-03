@@ -12,7 +12,6 @@ import stockgestion.Entite.*;
 
 /**
  * Manager des Articles
- * @author 7h1b0
  */
 public class ArticleManagerBDD extends Manager{
         private static ArticleManagerBDD instance = null;

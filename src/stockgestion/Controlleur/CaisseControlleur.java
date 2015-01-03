@@ -2,7 +2,6 @@ package stockgestion.Controlleur;
 
 import java.util.Map;
 import stockgestion.Entite.*;
-import stockgestion.Manager.ArticleManagerBDD;
 
 public class CaisseControlleur {
     private static CaisseControlleur instance = null;
@@ -17,7 +16,7 @@ public class CaisseControlleur {
     }
 
     /**
-     * 
+     * Ouvrir la caisse
      * @param caisse la caisse a ouvrir
      */
     public void ouvrir(Caisse caisse) {
@@ -25,7 +24,7 @@ public class CaisseControlleur {
     }
 
     /**
-     * 
+     * Fermer la caisse
      * @param caisse la caisse a fermer
      */
     public void fermer(Caisse caisse) {
@@ -33,7 +32,7 @@ public class CaisseControlleur {
     }
 
     /**
-     * 
+     * Ajout un Client dans la liste des clients de la caisse
      * @param caisse la caisse dont on veut ajouter un client
      * @param client le client a ajouter a la caisse
      */
@@ -42,8 +41,9 @@ public class CaisseControlleur {
     }
     
     /**
-     * 
+     * Calcul la somme des prix des articles vendu
      * @param caisse la caisse dont on veut calculer le total
+     * @return Double ( Somme )
      */
     public double calculerSomme(Caisse caisse) {
         double somme = 0;

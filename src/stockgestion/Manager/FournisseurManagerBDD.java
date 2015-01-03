@@ -12,7 +12,6 @@ import stockgestion.Entite.*;
 
 /**
  * Manager des Fournisseurs
- * @author 7h1b0
  */
 public class FournisseurManagerBDD extends Manager{
 

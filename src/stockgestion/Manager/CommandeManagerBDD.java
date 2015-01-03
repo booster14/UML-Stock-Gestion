@@ -12,7 +12,6 @@ import stockgestion.Entite.*;
 
 /**
  * Manager des Commandes
- * @author 7h1b0
  */
 public class CommandeManagerBDD extends Manager{
         private static CommandeManagerBDD instance = null;

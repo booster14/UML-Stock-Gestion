@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 /**
  * Classe abstraite permettant au Manager de se connecter à la BDD
- * @author 7h1b0
  */
 public abstract class Manager {
     protected Connection connexion;

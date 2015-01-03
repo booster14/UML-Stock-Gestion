@@ -37,6 +37,7 @@ public class ClientControlleur {
     /**
      * Après appuie sur la touche <Total>, le tiroir s'ouvre et le montant de la vente est calculer et s'affiche
      * @param client
+     * @return Double
      */
     public double calculerSomme(Client client) {
         double somme = 0;

@@ -19,7 +19,7 @@ public class CommandeControlleur {
     }
 
     /**
-     * 
+     * Ajouter une commande
      * @param commande commande a ajouter dans la BDD
      */
     public void ajouter(Commande commande) {
@@ -27,7 +27,7 @@ public class CommandeControlleur {
     }
 
     /**
-     * 
+     * Annuler une commande
      * @param commande commande a supprimer de la BDD
      */
     public void annuler(Commande commande) {
@@ -35,7 +35,7 @@ public class CommandeControlleur {
     }
 
     /**
-     * 
+     * Imprimer l'écran
      * @param commande commande a imprimer
      */
     public void imprimer(Commande commande) {
@@ -59,6 +59,10 @@ public class CommandeControlleur {
         return bdd.get(article);
     }
     
+    /**
+     * Mettre la jour le niveau de stock d'un article
+     * @param article 
+     */
     public void updateStockArticleCommande(Article article){
         Commande commande = getCommandeArticle(article);
         int stockAjoute = commande.getQuantite();

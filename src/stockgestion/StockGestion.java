@@ -43,20 +43,32 @@ public class StockGestion {
         return instance;
     }
     
+    /**
+     * Mettre à jour la vue Inventaire
+     */
     private void refreshInventaire(){
         inventaire.refreshTable(articleControlleur.getAllArticles());
     }
     
+    /**
+     * Mettre à jour la vue Produit à commander
+     */
     private void refreshCommanderProduits(){
         commanderProduit.refreshTable(articleControlleur.getArticlesACommander());
     }
     
+    /**
+     * Mettre à jour la liste des fournisseurs
+     */
     private void refreshListeFournisseur(){
         List<Fournisseur> list = fournisseurControlleur.getAllFournisseur();
         ajouterArticle.refreshListeFournisseur(list);
         viewArticle.refreshListeFournisseur(list);
     }
     
+    /**
+     * Mettre à jour l'affichage
+     */
     public void refreshUI(){
         refreshCommanderProduits();
         refreshInventaire();

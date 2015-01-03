@@ -21,7 +21,7 @@ public class ArticleControlleur {
     }
 
     /**
-     * 
+     * Ajouter un article
      * @param article article a ajouter
      */
     public void ajouter(Article article) {
@@ -29,7 +29,7 @@ public class ArticleControlleur {
     }
 
     /**
-     * 
+     * Supprimer un article
      * @param article article a supprimer
      */
     public void supprimer(Article article) {
@@ -37,7 +37,7 @@ public class ArticleControlleur {
     }
 
     /**
-     * 
+     * Editer un article
      * @param article article a modifier
      */
     public void editer(Article article) {
@@ -45,29 +45,43 @@ public class ArticleControlleur {
     }
 
     /**
-     * 
+     * Obtenir un Article à partir de son ID
      * @param id l'id de l'article
+     * @return Article
      */
     public Article getArticle(int id) {
         return bdd.get(id);
     }
     
     /**
-     * 
+     * Obtenir un Article à partir de son code barre
      * @param codeBarre le code barre de l'article
+     * @return Article
      */
     public Article getArticleByCodebarre(int codeBarre) {
         return bdd.getByCodebarre(codeBarre);
     }
 
+    /**
+     * Obtenir la liste de tous les articles
+     * @return List<Article> 
+     */
     public List<Article> getAllArticles() {
         return bdd.getAll();
     }
 
+    /**
+     * Obtenir la liste de tous les articles à commander
+     * @return List<Article>
+     */
     public List<Article> getArticlesACommander() {
         return bdd.getACommander();
     }
     
+    /**
+     * Obtenir un article aléatoire
+     * @return Article
+     */
     public Article getRandomArticle(){
         List<Article> list = getAllArticles();
         Random rand = new Random();
