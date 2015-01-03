@@ -69,8 +69,22 @@ public class CommandeManagerBDD extends Manager{
 	}
         
         /**
+	 * Supprime une Commande de la base de donnée à partir de l'ID de l'article
+	 * @param id 
+	 */
+	public void supprimer(int id) {       
+            try {
+                Statement statement = connexion.createStatement();
+                String string = "DELETE FROM COMMANDE WHERE ID_ARTICLE = "+id;
+                statement.executeUpdate(string);
+            } catch (SQLException ex) {
+                Logger.getLogger(CommandeManagerBDD.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+	}
+        
+        /**
          * Détermine si un article est en commande ou non
-         * @param id (Id de l'article
+         * @param id (Id de l'article)
          * @return true si commandé, false sinon
          */
         public boolean estCommande(int id){
