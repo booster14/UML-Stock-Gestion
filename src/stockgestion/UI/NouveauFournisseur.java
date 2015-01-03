@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockgestion.UI;
 
 import java.awt.event.ActionEvent;
@@ -12,10 +7,6 @@ import stockgestion.Controlleur.FournisseurControlleur;
 import stockgestion.Entite.Fournisseur;
 import stockgestion.Outil.Verificateur;
 
-/**
- *
- * @author rubeus
- */
 public class NouveauFournisseur extends javax.swing.JFrame {
     private static NouveauFournisseur instance = null;
     private JFrame previousFrame;

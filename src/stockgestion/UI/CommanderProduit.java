@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockgestion.UI;
 
 import java.awt.Color;
@@ -21,10 +16,7 @@ import stockgestion.Controlleur.CommandeControlleur;
 import stockgestion.Entite.*;
 import stockgestion.Outil.Verificateur;
 
-/**
- *
- * @author rubeus
- */
+
 public class CommanderProduit extends javax.swing.JFrame {
     private static CommanderProduit instance = null;
     private List<Article> listArticles;
