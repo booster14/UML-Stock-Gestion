@@ -66,6 +66,11 @@ public class ArticleManagerBDD extends Manager{
 	public void supprimer(Article article) {
             int id = article.getId();
             
+            // Suppression de la commande si une commande existe
+            if(CommandeManagerBDD.getInstance().estCommande(article)){
+                CommandeManagerBDD.getInstance().supprimer(article.getId());
+            }
+                          
             try {
                 Statement statement = connexion.createStatement();
                 String string = "DELETE FROM FOURNI WHERE ID_ARTICLE ="+id;
