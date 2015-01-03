@@ -47,16 +47,13 @@ Cette ligne initialisera un objet Article nommé article dont l'ID dans la base 
 ## Autheurs
 
 ### Thibault
-* Etape 1 : 2)
-* Etape 2 : 2.2)
-* Manager
+* Etape 1 : 2) - OK
+* Etape 2 : 2.2) - OK
 
 ### Quentin
-* Etape 1 : 3)
-* Etape 2: 2.1)
-* UI + Entité
+* Etape 1 : 3) - En Attente
+* Etape 2: 2.1) - En Attente
 
 ### Ngocky
-* Etape 1 : 4)
-* Etape 2 : 1)
-* Contrôlleurs
+* Etape 1 : 4) - OK
+* Etape 2 : 1) - OK
