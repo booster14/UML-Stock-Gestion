@@ -122,13 +122,15 @@ private Article article;
                 if(tiroirOuvert) // fermeture du tiroir
                 {
                     fermerTiroir();
+                    retourArticle.setEnabled(true);
                     
                     if(retourBool){
-                        codeBarre.setText(null);
-                        codeBarreEtat.setText(null);
-                        Client client2 = new Client();
-                        ClientControlleur.getInstance().retournerArticle(client2, article);
-                        CaisseControlleur.getInstance().ajouterClient(caisse, client2);
+                        clearUI();
+                        //Client client2 = new Client();
+                        //ClientControlleur.getInstance().retournerArticle(client2, article);
+                        //CaisseControlleur.getInstance().ajouterClient(caisse, client2);
+                        CaisseControlleur.getInstance().ajouterClient(caisse, client);
+                        client = new Client();
                         retourBool = false;
                         retourArticle.setForeground(Color.black);
                         
@@ -165,9 +167,13 @@ private Article article;
             codeBarreEtat.setText("Code barre non reconnu");
 
         }else{
+            retourArticle.setEnabled(false);
             codeBarreEtat.setForeground(Color.BLACK);
             codeBarreEtat.setText(article.getNom() + "\t\t" + article.getPrix());
             if(retourBool){
+                ClientControlleur.getInstance().retournerArticle(client, article);
+                updateTable();
+                total.setText(String.valueOf(ClientControlleur.getInstance().calculerSomme(client)));
                 ouvrirTiroir();
             }else{
                 ClientControlleur.getInstance().ajouterArticle(client, article.getId());
@@ -193,6 +199,8 @@ private Article article;
         codeBarre.setText(null);
         codeBarreEtat.setText(null);
         total.setText(null);
+        retourBool = false;
+        retourArticle.setForeground(Color.black);
         resetTable();
     }
     
@@ -200,9 +208,7 @@ private Article article;
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         for(Entry <Article, Integer> entry : client.getListArticles().entrySet()){
-            if(entry.getValue() > 0){
-                model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
-            }
+            model.addRow(new Object[]{entry.getKey().getNom(), entry.getValue(), entry.getKey().getPrix()});
         }
         table.setModel(model);
     }
