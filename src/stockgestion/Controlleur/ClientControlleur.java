@@ -42,9 +42,7 @@ public class ClientControlleur {
     public double calculerSomme(Client client) {
         double somme = 0;
         for(Map.Entry <Article, Integer> entry : client.getListArticles().entrySet()){
-            if(entry.getValue() > 0){
-                somme += entry.getKey().getPrix() * entry.getValue();
-            }
+            somme += entry.getKey().getPrix() * entry.getValue();
         }
         
         client.setSomme(somme);
